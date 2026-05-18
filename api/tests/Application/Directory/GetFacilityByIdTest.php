@@ -54,7 +54,7 @@ final class GetFacilityByIdTest extends WebTestCase
         $em->persist($b2g);
 
         $legalUnit = LegalUnitPayloadHistory::create(
-            idInstance: 10,
+            idInstance: 1,
             siren: '123456789',
             businessName: 'test business name',
             entityType: EntityType::Public,
@@ -157,7 +157,7 @@ final class GetFacilityByIdTest extends WebTestCase
         $em->persist($b2g);
 
         $legalUnit = LegalUnitPayloadHistory::create(
-            idInstance: 10,
+            idInstance: 1,
             siren: '123456789',
             businessName: 'test business name',
             entityType: EntityType::Public,

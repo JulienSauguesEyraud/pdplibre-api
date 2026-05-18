@@ -20,25 +20,25 @@ class B2gAdditionalData
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(name: 'id', unique: true)]
     private int $id;
 
-    #[ORM\Column]
+    #[ORM\Column(name: 'pm')]
     private bool $pm;
 
-    #[ORM\Column]
+    #[ORM\Column(name: 'pm_only')]
     private bool $pmOnly;
 
-    #[ORM\Column]
+    #[ORM\Column(name: 'manages_payment_status')]
     private bool $managesPaymentStatus;
 
-    #[ORM\Column]
+    #[ORM\Column(name: 'manages_legal_commitment_code')]
     private bool $managesLegalCommitmentCode;
 
-    #[ORM\Column]
+    #[ORM\Column(name: 'manages_legal_commitment_or_service_code')]
     private bool $managesLegalCommitmentOrServiceCode;
 
-    #[ORM\Column]
+    #[ORM\Column(name: 'service_code_status')]
     private bool $serviceCodeStatus;
 
     public static function create(bool $pm, bool $pmOnly, bool $managesPaymentStatus, bool $managesLegalCommitmentCode, bool $managesLegalCommitmentOrServiceCode, bool $serviceCodeStatus): B2gAdditionalData

@@ -12,19 +12,19 @@ use Doctrine\ORM\Mapping as ORM;
 class LegalUnitPayloadHistory
 {
     #[ORM\Id]
-    #[ORM\Column(unique: true)]
+    #[ORM\Column(name: 'id_instance', unique: true)]
     private int $idInstance;
 
-    #[ORM\Column(length: 9)]
+    #[ORM\Column(name: 'siren' ,length: 9)]
     private string $siren;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(name: 'business_name', length: 255)]
     private string $businessName;
 
-    #[ORM\Column]
+    #[ORM\Column(name: 'entity_type')]
     private EntityType $entityType;
 
-    #[ORM\Column]
+    #[ORM\Column(name: 'administrative_status')]
     private LegalUnitAdministrativeStatus $administrativeStatus;
 
     public static function create(int $idInstance, string $siren, string $businessName, EntityType $entityType, LegalUnitAdministrativeStatus $administrativeStatus,): self {

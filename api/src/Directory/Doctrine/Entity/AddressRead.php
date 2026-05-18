@@ -11,31 +11,31 @@ class AddressRead
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(name: 'id', unique: true)]
     private int $id;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(name: 'address_line1', length: 255)]
     private string $addressLine1;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(name: 'address_line2', length: 255)]
     private ?string $addressLine2;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(name: 'address_line3', length: 255)]
     private ?string $addressLine3;
 
-    #[ORM\Column(length: 5)]
+    #[ORM\Column(name: 'postal_code', length: 5)]
     private string $postalCode;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(name: 'country_subdivision', length: 255)]
     private string $countrySubdivision;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(name: 'locality', length: 100)]
     private string $locality;
 
-    #[ORM\Column(length: 2)]
+    #[ORM\Column(name: 'country_code', length: 2)]
     private string $countryCode;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(name: 'country_name', length: 100)]
     private string $countryName;
 
     public static function create(string $addressLine1, string $addressLine2, string $addressLine3, string $postalCode, string $countrySubdivision, string $locality, string $countryCode, string $countryName): self
