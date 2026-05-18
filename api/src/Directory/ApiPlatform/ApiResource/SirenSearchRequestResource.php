@@ -10,9 +10,11 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Response;
 use App\Directory\ApiPlatform\StateProcessor\SearchSirenProcessor;
+use App\Directory\Enum\Order;
 use App\Directory\Input\LegalUnitPayloadHistoryInput;
 use App\Directory\Input\SearchSirenFilters;
 use App\Directory\Input\SearchSirenSorting;
+use App\Directory\Input\SearchSiretSorting;
 use App\Flow\ApiPlatform\StateProcessor\SearchFlowProcessor;
 use App\Flow\Input\SearchFlowFilters;
 use App\Flow\ValueObjects\SearchFlowInput;
@@ -46,13 +48,6 @@ use Symfony\Component\Validator\Constraints as Assert;
         processor: SearchSirenProcessor::class,
     ),
 ])]
-
-/**
- * @param array<SearchSirenSorting> $sorting
- */
-/**
- * @param array<string> $fields
- */
 final class SirenSearchRequestResource
 {
     #[Assert\Range(min: 1, max: 100)]
@@ -66,13 +61,31 @@ final class SirenSearchRequestResource
     #[Assert\Valid]
     public SearchSirenFilters $filters;
 
-    /**var array<SearchSirenSorting>*/
-    #[Assert\Valid]
+    /**
+     * @var array<SearchSirenSorting>|null
+     */
+    #[Assert\All(constraints: [
+        new Assert\Type(SearchSirenSorting::class),
+    ])]
     public ?array $sorting = null;
 
-    /**var array<string>*/
     #[Assert\Valid]
     public ?array $fields = null;
 
     // TODO rajouter ignore
+
+    public function setSorting(?array $sorting): void
+    {
+        if ($sorting === null) {
+            $this->sorting = null;
+            return;
+        }
+
+        foreach ($sorting as $sort) {
+            $sortingObj = new SearchSirenSorting();
+            $sortingObj->field = $sort['field'] ?? null;
+            $sortingObj->order = Order::from($sort['order']) ?? null;
+            $this->sorting[] = $sortingObj;
+        }
+    }
 }

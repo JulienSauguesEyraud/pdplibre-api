@@ -10,6 +10,7 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Response;
 use App\Directory\ApiPlatform\StateProcessor\SearchSiretProcessor;
+use App\Directory\Enum\Order;
 use App\Directory\Input\FacilityPayloadHistoryInput;
 use App\Directory\Input\SearchSiretFilters;
 use App\Directory\Input\SearchSiretSorting;
@@ -43,7 +44,6 @@ use Symfony\Component\Validator\Constraints as Assert;
         processor: SearchSiretProcessor::class,
     ),
 ])]
-
 final class SiretSearchRequestResource
 {
     #[Assert\Range(min: 1, max: 100)]
@@ -69,4 +69,19 @@ final class SiretSearchRequestResource
 
     // TODO rajouter ignore
     // TODO rajouter include
+
+    public function setSorting(?array $sorting): void
+    {
+        if ($sorting === null) {
+            $this->sorting = null;
+            return;
+        }
+
+        foreach ($sorting as $sort) {
+            $sortingObj = new SearchSiretSorting();
+            $sortingObj->field = $sort['field'] ?? null;
+            $sortingObj->order = Order::from($sort['order']) ?? null;
+            $this->sorting[] = $sortingObj;
+        }
+    }
 }

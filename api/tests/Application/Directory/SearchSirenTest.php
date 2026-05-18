@@ -138,71 +138,70 @@ final class SearchSirenTest extends WebTestCase
         self::assertArrayNotHasKey('administrativeStatus', $response['results'][0]);
     }
 
-////TODO
-//    public function testSearchSirenWithSorting(): void
-//    {
-//        $client = self::createClient();
-//        $container = self::getContainer();
-//
-//        $em = $container->get('doctrine')->getManager();
-//
-//        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\FacilityPayloadHistory e')->execute();
-//        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\AddressRead e')->execute();
-//        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\B2gAdditionalData e')->execute();
-//        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\LegalUnitPayloadHistory e')->execute();
-//
-//        $entity = LegalUnitPayloadHistory::create(
-//            idInstance: 1,
-//            siren: '123456789',
-//            businessName: 'test business name',
-//            entityType: EntityType::Public,
-//            administrativeStatus: LegalUnitAdministrativeStatus::A,
-//        );
-//
-//        $em->persist($entity);
-//        $em->flush();
-//
-//        $filters = new SearchSirenFilters();
-//        $businessNameFilter = new SearchSirenFiltersBusinessName();
-//        $businessNameFilter->businessName = 'test business name';
-//        $filters->businessName = $businessNameFilter;
-//
-//        $sorting = new SearchSirenSorting();
-//        $sorting->field = 'siren';
-//        $sorting->order = Order::ascending;
-//
-//        $client->request(
-//            'POST',
-//            '/v1/siren/search',
-//            [],
-//            [],
-//            ['CONTENT_TYPE' => 'application/json'],
-//            json_encode([
-//                'filters' => $filters,
-//                'sorting' => [$sorting]
-//            ])
-//        );
-//
-//        self::assertResponseIsSuccessful();
-//
-//        $response = json_decode($client->getResponse()->getContent(), true);
-//
-//        self::assertSame(25, $response['limit']);
-//
-//        self::assertSame($filters->businessName->businessName, $response['filters']['businessName']['businessName']);
-//        self::assertSame($filters->businessName->operator->value, $response['filters']['businessName']['operator']);
-//
-//        self::assertNull($response['fields']);
-//
-//        self::assertSame($sorting->field, $response['sorting'][0]['field']);
-//        self::assertSame($sorting->order->value, $response['sorting'][0]['order']);
-//
-//        self::assertSame(1, $response['results'][0]['idInstance']);
-//        self::assertSame('123456789', $response['results'][0]['siren']);
-//        self::assertSame('test business name', $response['results'][0]['businessName']);
-//        self::assertSame('Public', $response['results'][0]['entityType']);
-//        self::assertSame('A', $response['results'][0]['administrativeStatus']);
-//    }
+    public function testSearchSirenWithSorting(): void
+    {
+        $client = self::createClient();
+        $container = self::getContainer();
+
+        $em = $container->get('doctrine')->getManager();
+
+        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\FacilityPayloadHistory e')->execute();
+        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\AddressRead e')->execute();
+        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\B2gAdditionalData e')->execute();
+        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\LegalUnitPayloadHistory e')->execute();
+
+        $entity = LegalUnitPayloadHistory::create(
+            idInstance: 1,
+            siren: '123456789',
+            businessName: 'test business name',
+            entityType: EntityType::Public,
+            administrativeStatus: LegalUnitAdministrativeStatus::A,
+        );
+
+        $em->persist($entity);
+        $em->flush();
+
+        $filters = new SearchSirenFilters();
+        $businessNameFilter = new SearchSirenFiltersBusinessName();
+        $businessNameFilter->businessName = 'test business name';
+        $filters->businessName = $businessNameFilter;
+
+        $sorting = new SearchSirenSorting();
+        $sorting->field = 'siren';
+        $sorting->order = Order::ascending;
+
+        $client->request(
+            'POST',
+            '/v1/siren/search',
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
+            json_encode([
+                'filters' => $filters,
+                'sorting' => [$sorting]
+            ])
+        );
+
+        self::assertResponseIsSuccessful();
+
+        $response = json_decode($client->getResponse()->getContent(), true);
+
+        self::assertSame(25, $response['limit']);
+
+        self::assertSame($filters->businessName->businessName, $response['filters']['businessName']['businessName']);
+        self::assertSame($filters->businessName->operator->value, $response['filters']['businessName']['operator']);
+
+        self::assertNull($response['fields']);
+
+        self::assertSame($sorting->field, $response['sorting'][0]['field']);
+        self::assertSame($sorting->order->value, $response['sorting'][0]['order']);
+
+        self::assertSame(1, $response['results'][0]['idInstance']);
+        self::assertSame('123456789', $response['results'][0]['siren']);
+        self::assertSame('test business name', $response['results'][0]['businessName']);
+        self::assertSame('Public', $response['results'][0]['entityType']);
+        self::assertSame('A', $response['results'][0]['administrativeStatus']);
+    }
 
     public function testSearchSirenWithLimit(): void
     {
