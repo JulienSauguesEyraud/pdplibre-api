@@ -44,12 +44,6 @@ use Symfony\Component\Validator\Constraints as Assert;
     ),
 ])]
 
-/**
- * @param array<SearchSiretSorting> $sorting
- */
-/**
- * @param array<string> $fields
- */
 final class SiretSearchRequestResource
 {
     #[Assert\Range(min: 1, max: 100)]
@@ -63,10 +57,14 @@ final class SiretSearchRequestResource
     #[Assert\Valid]
     public SearchSiretFilters $filters;
 
-    #[Assert\Valid]
+    /**
+     * @var array<SearchSiretSorting>|null
+     */
+    #[Assert\All(constraints: [
+        new Assert\Type(SearchSiretSorting::class),
+    ])]
     public ?array $sorting = null;
 
-    #[Assert\Valid]
     public ?array $fields = null;
 
     // TODO rajouter ignore

@@ -67,7 +67,7 @@ final class GetSiretByIdInstanceTest extends WebTestCase
             idInstance: 1,
             siret: '12345678900000',
             siren: '123456789',
-            name: 'test facility',
+            name: 'test name',
             facilityType: FacilityType::P,
             diffusible: DiffusionStatus::P,
             administrativeStatus: FacilityAdministrativeStatus::A,
@@ -88,7 +88,7 @@ final class GetSiretByIdInstanceTest extends WebTestCase
         self::assertSame(1, $response['idInstance']);
         self::assertSame('123456789', $response['siren']);
         self::assertSame('12345678900000', $response['siret']);
-        self::assertSame('test facility', $response['name']);
+        self::assertSame('test name', $response['name']);
         self::assertSame('P', $response['facilityType']);
         self::assertSame('P', $response['diffusible']);
         self::assertSame('A', $response['administrativeStatus']);
@@ -170,7 +170,7 @@ final class GetSiretByIdInstanceTest extends WebTestCase
             idInstance: 1,
             siret: '12345678900000',
             siren: '123456789',
-            name: 'test facility',
+            name: 'test name',
             facilityType: FacilityType::P,
             diffusible: DiffusionStatus::P,
             administrativeStatus: FacilityAdministrativeStatus::A,
@@ -194,7 +194,7 @@ final class GetSiretByIdInstanceTest extends WebTestCase
         self::assertNull($response['idInstance']);
         self::assertNull($response['siren']);
         self::assertSame('12345678900000', $response['siret']);
-        self::assertSame('test facility', $response['name']);
+        self::assertSame('test name', $response['name']);
         self::assertSame('P', $response['facilityType']);
         self::assertNull($response['diffusible']);
         self::assertNull($response['administrativeStatus']);
