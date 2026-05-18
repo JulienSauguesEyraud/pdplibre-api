@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Directory;
 
-use App\Directory\Actions\SearchSiret;
-use App\Directory\ApiPlatform\ApiResource\SiretSearchRequestResource;
+use App\Directory\Actions\SearchFacilityBySiret as SearchFacilityBySiretAction;
+use App\Directory\ApiPlatform\ApiResource\SearchFacilityBySiret;
 use App\Directory\Doctrine\Entity\AddressRead;
 use App\Directory\Doctrine\Entity\B2gAdditionalData;
 use App\Directory\Doctrine\Entity\FacilityPayloadHistory;
@@ -22,7 +22,7 @@ use App\Directory\Input\SearchSiretSorting;
 use App\Directory\Repository\FacilityPayloadHistoryRepository;
 use PHPUnit\Framework\TestCase;
 
-final class ActionSearchSiretTest extends TestCase
+final class ActionSearchFacilityBySiretTest extends TestCase
 {
     public function testReturnsMappedResults(): void
     {
@@ -70,7 +70,7 @@ final class ActionSearchSiretTest extends TestCase
         $filters->name = new SearchSiretFiltersName();
         $filters->name->name = 'test name';
 
-        $input = new SiretSearchRequestResource();
+        $input = new SearchFacilityBySiret();
         $input->filters = $filters;
 
         $repository = $this->createMock(FacilityPayloadHistoryRepository::class);
@@ -81,7 +81,7 @@ final class ActionSearchSiretTest extends TestCase
             ->with($filters)
             ->willReturn([$entity]);
 
-        $action = new SearchSiret($repository);
+        $action = new SearchFacilityBySiretAction($repository);
 
         $result = $action->__invoke($input);
 
@@ -177,7 +177,7 @@ final class ActionSearchSiretTest extends TestCase
             $sort2
         ];
 
-        $input = new SiretSearchRequestResource();
+        $input = new SearchFacilityBySiret();
         $input->filters = $filters;
         $input->sorting = $sorting;
 
@@ -192,7 +192,7 @@ final class ActionSearchSiretTest extends TestCase
             )
             ->willReturn([$entity]);
 
-        $action = new SearchSiret($repository);
+        $action = new SearchFacilityBySiretAction($repository);
 
         $result = $action->__invoke($input);
 
@@ -275,7 +275,7 @@ final class ActionSearchSiretTest extends TestCase
         $filters->name = new SearchSiretFiltersName();
         $filters->name->name = 'test name';
 
-        $input = new SiretSearchRequestResource();
+        $input = new SearchFacilityBySiret();
         $input->filters = $filters;
         $input->limit = 10;
 
@@ -291,7 +291,7 @@ final class ActionSearchSiretTest extends TestCase
             )
             ->willReturn([$entity]);
 
-        $action = new SearchSiret($repository);
+        $action = new SearchFacilityBySiretAction($repository);
 
         $result = $action->__invoke($input);
 
@@ -382,7 +382,7 @@ final class ActionSearchSiretTest extends TestCase
             'pmOnly'
         ];
 
-        $input = new SiretSearchRequestResource();
+        $input = new SearchFacilityBySiret();
         $input->filters = $filters;
         $input->fields = $fields;
 
@@ -394,7 +394,7 @@ final class ActionSearchSiretTest extends TestCase
             ->with($filters)
             ->willReturn([$entity]);
 
-        $action = new SearchSiret($repository);
+        $action = new SearchFacilityBySiretAction($repository);
 
         $result = $action->__invoke($input);
 
@@ -448,7 +448,7 @@ final class ActionSearchSiretTest extends TestCase
             'administrativeStatus',
         ];
 
-        $input = new SiretSearchRequestResource();
+        $input = new SearchFacilityBySiret();
         $input->limit = 10;
         $input->filters = $filters;
         $input->sorting = $sorting;
@@ -466,7 +466,7 @@ final class ActionSearchSiretTest extends TestCase
             )
             ->willReturn([]);
 
-        $action = new SearchSiret($repository);
+        $action = new SearchFacilityBySiretAction($repository);
 
         $result = $action->__invoke($input);
 

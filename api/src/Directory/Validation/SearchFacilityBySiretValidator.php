@@ -8,7 +8,7 @@ use App\Common\Exception\InvalidInputException;
 use App\Directory\Input\SearchSiretFilters;
 use App\Directory\Input\SearchSiretSorting;
 
-final readonly class SearchSiretValidator
+final readonly class SearchFacilityBySiretValidator
 {
     private const ALLOWED_FIELDS = [
         "siret",

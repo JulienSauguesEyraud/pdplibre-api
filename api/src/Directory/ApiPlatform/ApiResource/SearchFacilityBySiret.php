@@ -9,7 +9,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Response;
-use App\Directory\ApiPlatform\StateProcessor\SearchSiretProcessor;
+use App\Directory\ApiPlatform\StateProcessor\SearchFacilityBySiretProcessor;
 use App\Directory\Enum\Order;
 use App\Directory\Input\FacilityPayloadHistoryInput;
 use App\Directory\Input\SearchSiretFilters;
@@ -40,11 +40,11 @@ use Symfony\Component\Validator\Constraints as Assert;
             description: 'Multi-criteria search for facilities.',
         ),
         output: FacilityPayloadHistoryInput::class,
-        name: 'searchSiret',
-        processor: SearchSiretProcessor::class,
+        name: 'searchFacilityBySiret',
+        processor: SearchFacilityBySiretProcessor::class,
     ),
 ])]
-final class SiretSearchRequestResource
+final class SearchFacilityBySiret
 {
     #[Assert\Range(min: 1, max: 100)]
     #[ApiProperty(

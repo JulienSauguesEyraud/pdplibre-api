@@ -14,16 +14,14 @@ use App\Directory\Enum\FacilityAdministrativeStatus;
 use App\Directory\Enum\FacilityType;
 use App\Directory\Enum\LegalUnitAdministrativeStatus;
 use App\Directory\Enum\Order;
-use App\Directory\Input\SearchSirenFilters;
-use App\Directory\Input\SearchSirenFiltersBusinessName;
 use App\Directory\Input\SearchSiretFilters;
 use App\Directory\Input\SearchSiretFiltersName;
 use App\Directory\Input\SearchSiretSorting;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-final class SearchSiretTest extends WebTestCase
+final class SearchFacilityBySiretTest extends WebTestCase
 {
-    public function testSearchSiret(): void
+    public function testSearchFacilityBySiret(): void
     {
         $client = self::createClient();
         $container = self::getContainer();
@@ -139,7 +137,7 @@ final class SearchSiretTest extends WebTestCase
         self::assertSame('A', $response['results'][0]['legalUnit']['administrativeStatus']);
     }
 
-    public function testSearchSiretWithFields(): void
+    public function testSearchFacilityBySiretWithFields(): void
     {
         $client = self::createClient();
         $container = self::getContainer();
@@ -267,7 +265,7 @@ final class SearchSiretTest extends WebTestCase
         self::assertSame('A', $response['results'][0]['legalUnit']['administrativeStatus']);
     }
 
-    public function testSearchSiretWithSorting(): void
+    public function testSearchFacilityBySiretWithSorting(): void
     {
         $client = self::createClient();
         $container = self::getContainer();
@@ -390,7 +388,7 @@ final class SearchSiretTest extends WebTestCase
         self::assertSame('A', $response['results'][0]['legalUnit']['administrativeStatus']);
     }
 
-    public function testSearchSiretWithLimit(): void
+    public function testSearchFacilityBySiretWithLimit(): void
     {
         $client = self::createClient();
         $container = self::getContainer();

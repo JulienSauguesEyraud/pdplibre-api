@@ -6,7 +6,7 @@ namespace App\Directory\Validation;
 
 use App\Common\Exception\InvalidInputException;
 
-final readonly class GetSiretByIdInstanceValidator
+final readonly class GetFacilityBySiretValidator
 {
     private const ALLOWED_FIELDS = [
         "siret",
@@ -25,16 +25,23 @@ final readonly class GetSiretByIdInstanceValidator
         "idInstance"
     ];
 
-    public function validate(int $idInstance, ?array $fields = null): void
+    public function validate(string $siret, ?array $fields = null): void
     {
-        $this->validateIdInstance($idInstance);
+        $this->validateSiret($siret);
         $this->validateFields($fields);
     }
 
-    private function validateIdInstance(int $idInstance): void
+    private function validateSiret(string $siret): void
     {
-        if (!$idInstance) {
-            throw new InvalidInputException('idInstance', 'idInstance cannot be 0');
+        if (!$siret) {
+            throw new InvalidInputException('siret', 'siret cannot be empty');
+        }
+
+        if (!preg_match('/^\d{14}$/', $siret)) {
+            throw new InvalidInputException(
+                'siret',
+                'siret must be exactly 14 digits (0-9)'
+            );
         }
     }
 

@@ -10,9 +10,9 @@ use ApiPlatform\State\ProcessorInterface;
 use App\Common\ApiPlatform\ApiValidationException;
 use App\Common\Exception\InvalidInputException;
 use App\Common\Exception\ObjectNotFoundException;
-use App\Directory\Actions\SearchSiret;
-use App\Directory\ApiPlatform\ApiResource\SiretSearchRequestResource;
-use App\Directory\Validation\SearchSiretValidator;
+use App\Directory\Actions\SearchFacilityBySiret as SearchFacilityBySiretAction;
+use App\Directory\ApiPlatform\ApiResource\SearchFacilityBySiret;
+use App\Directory\Validation\SearchFacilityBySiretValidator;
 use App\Directory\ValueObjects\SearchSiretInput;
 use App\User\Doctrine\Entity\ApiConsumer;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,13 +20,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class SearchSiretProcessor implements ProcessorInterface
+final class SearchFacilityBySiretProcessor implements ProcessorInterface
 {
     public function __construct(
-        private TokenStorageInterface $tokenStorage,
-        private SearchSiret $action,
-        private SearchSiretValidator $validator,
-        private TranslatorInterface $translator,
+        private TokenStorageInterface          $tokenStorage,
+        private SearchFacilityBySiretAction    $action,
+        private SearchFacilityBySiretValidator $validator,
+        private TranslatorInterface            $translator,
     ) {
     }
 
@@ -37,12 +37,12 @@ final class SearchSiretProcessor implements ProcessorInterface
 
         $currentUser = $this->tokenStorage->getToken()?->getUser();
 
-        assert($data instanceof SiretSearchRequestResource);
+        assert($data instanceof SearchFacilityBySiret);
         assert($operation instanceof Post);
         assert($request instanceof Request);
         assert($currentUser instanceof ApiConsumer);
         assert('searchSiret' === $operation->getName());
-        assert(SiretSearchRequestResource::class === $operation->getClass());
+        assert(SearchFacilityBySiret::class === $operation->getClass());
 
         try {
             $this->validator->validate($data->fields, $data->filters, $data->sorting);

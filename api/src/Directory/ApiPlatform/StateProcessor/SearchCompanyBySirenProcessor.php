@@ -41,7 +41,7 @@ final class SearchCompanyBySirenProcessor implements ProcessorInterface
         assert($operation instanceof Post);
         assert($request instanceof Request);
         assert($currentUser instanceof ApiConsumer);
-        assert('searchSiren' === $operation->getName());
+        assert('searchFacilityBySiret' === $operation->getName());
         assert(SearchCompanyBySiren::class === $operation->getClass());
 
         try {

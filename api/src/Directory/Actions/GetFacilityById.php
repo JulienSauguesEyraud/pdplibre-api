@@ -7,7 +7,7 @@ namespace App\Directory\Actions;
 use App\Directory\Repository\FacilityPayloadHistoryRepository;
 use App\Directory\ValueObjects\FacilityPayloadHistoryOutput;
 use App\Common\Exception\ObjectNotFoundException;
-final readonly class GetSiretByIdInstance
+final readonly class GetFacilityById
 {
     public function __construct(
         private FacilityPayloadHistoryRepository $repository,

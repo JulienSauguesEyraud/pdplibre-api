@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace App\Directory\Actions;
 
-use App\Directory\ApiPlatform\ApiResource\SiretSearchRequestResource;
+use App\Directory\ApiPlatform\ApiResource\SearchFacilityBySiret as SearchFacilityBySiretResource;
 use App\Directory\Repository\FacilityPayloadHistoryRepository;
 use App\Directory\ValueObjects\FacilityPayloadHistoryOutput;
 use App\Directory\ValueObjects\SearchSiretInput;
 
-final readonly class SearchSiret
+final readonly class SearchFacilityBySiret
 {
     public function __construct(
         private FacilityPayloadHistoryRepository $repository,
     ) {
     }
 
-    public function __invoke(SiretSearchRequestResource $input): SearchSiretInput
+    public function __invoke(SearchFacilityBySiretResource $input): SearchSiretInput
     {
         $entities = $this->repository->search(
             $input->filters,

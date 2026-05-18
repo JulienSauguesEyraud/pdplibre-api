@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Directory;
 
 use App\Common\Exception\ObjectNotFoundException;
-use App\Directory\Actions\GetSiretByIdInstance;
-use App\Directory\Actions\GetSiretBySiretNumber;
+use App\Directory\Actions\GetFacilityBySiret;
 use App\Directory\Doctrine\Entity\AddressRead;
 use App\Directory\Doctrine\Entity\B2gAdditionalData;
 use App\Directory\Doctrine\Entity\FacilityPayloadHistory;
@@ -19,7 +18,7 @@ use App\Directory\Enum\LegalUnitAdministrativeStatus;
 use App\Directory\Repository\FacilityPayloadHistoryRepository;
 use PHPUnit\Framework\TestCase;
 
-final class ActionGetSiretBySiretNumberTest extends TestCase
+final class ActionGetFacilityBySiretTest extends TestCase
 {
     public function testReturnsOutput(): void
     {
@@ -71,7 +70,7 @@ final class ActionGetSiretBySiretNumberTest extends TestCase
             ->with('12345678900000')
             ->willReturn($entity);
 
-        $action = new GetSiretBySiretNumber($repository);
+        $action = new GetFacilityBySiret($repository);
 
         $result = $action->__invoke('12345678900000');
 
@@ -154,7 +153,7 @@ final class ActionGetSiretBySiretNumberTest extends TestCase
             ->with('12345678900000')
             ->willReturn($entity);
 
-        $action = new GetSiretBySiretNumber($repository);
+        $action = new GetFacilityBySiret($repository);
 
         $result = $action->__invoke('12345678900000', ['siret', 'name', 'facilityType', 'address', 'pmOnly']);
 
@@ -195,7 +194,7 @@ final class ActionGetSiretBySiretNumberTest extends TestCase
             ->method('getSiretBySiretNumber')
             ->willReturn(null);
 
-        $action = new GetSiretBySiretNumber($repository);
+        $action = new GetFacilityBySiret($repository);
 
         $this->expectException(ObjectNotFoundException::class);
 

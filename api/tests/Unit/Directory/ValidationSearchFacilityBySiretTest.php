@@ -15,14 +15,14 @@ use App\Directory\Input\SearchSiretFiltersName;
 use App\Directory\Input\SearchSiretFiltersPostalCode;
 use App\Directory\Input\SearchSiretFiltersSiret;
 use App\Directory\Input\SearchSiretSorting;
-use App\Directory\Validation\SearchSiretValidator;
+use App\Directory\Validation\SearchFacilityBySiretValidator;
 use PHPUnit\Framework\TestCase;
 
-final class ValidationSearchSiretTest extends TestCase
+final class ValidationSearchFacilityBySiretTest extends TestCase
 {
     public function testValidateWithValidFieldsFiltersAndSorting(): void
     {
-        $validator = new SearchSiretValidator();
+        $validator = new SearchFacilityBySiretValidator();
 
         $filters = new SearchSiretFilters();
 
@@ -69,7 +69,7 @@ final class ValidationSearchSiretTest extends TestCase
 
     public function testThrowsIfFieldIsNotString(): void
     {
-        $validator = new SearchSiretValidator();
+        $validator = new SearchFacilityBySiretValidator();
 
         $this->expectException(InvalidInputException::class);
         $this->expectExceptionMessage(
@@ -83,7 +83,7 @@ final class ValidationSearchSiretTest extends TestCase
 
     public function testThrowsIfFieldIsInvalid(): void
     {
-        $validator = new SearchSiretValidator();
+        $validator = new SearchFacilityBySiretValidator();
 
         $this->expectException(InvalidInputException::class);
 
@@ -94,7 +94,7 @@ final class ValidationSearchSiretTest extends TestCase
 
     public function testThrowsIfSiretFilterIsInvalid(): void
     {
-        $validator = new SearchSiretValidator();
+        $validator = new SearchFacilityBySiretValidator();
 
         $filters = new SearchSiretFilters();
 
@@ -116,7 +116,7 @@ final class ValidationSearchSiretTest extends TestCase
 
     public function testThrowsIfSirenFilterIsInvalid(): void
     {
-        $validator = new SearchSiretValidator();
+        $validator = new SearchFacilityBySiretValidator();
 
         $filters = new SearchSiretFilters();
 
@@ -138,7 +138,7 @@ final class ValidationSearchSiretTest extends TestCase
 
     public function testThrowsIfPostalCodeFilterIsInvalid(): void
     {
-        $validator = new SearchSiretValidator();
+        $validator = new SearchFacilityBySiretValidator();
 
         $filters = new SearchSiretFilters();
 
@@ -160,7 +160,7 @@ final class ValidationSearchSiretTest extends TestCase
 
     public function testThrowsIfNameFilterIsEmpty(): void
     {
-        $validator = new SearchSiretValidator();
+        $validator = new SearchFacilityBySiretValidator();
 
         $filters = new SearchSiretFilters();
 
@@ -182,7 +182,7 @@ final class ValidationSearchSiretTest extends TestCase
 
     public function testThrowsIfAddressLinesFilterIsEmpty(): void
     {
-        $validator = new SearchSiretValidator();
+        $validator = new SearchFacilityBySiretValidator();
 
         $filters = new SearchSiretFilters();
 
@@ -204,7 +204,7 @@ final class ValidationSearchSiretTest extends TestCase
 
     public function testThrowsIfCountrySubdivisionFilterIsEmpty(): void
     {
-        $validator = new SearchSiretValidator();
+        $validator = new SearchFacilityBySiretValidator();
 
         $filters = new SearchSiretFilters();
 
@@ -226,7 +226,7 @@ final class ValidationSearchSiretTest extends TestCase
 
     public function testThrowsIfLocalityFilterIsEmpty(): void
     {
-        $validator = new SearchSiretValidator();
+        $validator = new SearchFacilityBySiretValidator();
 
         $filters = new SearchSiretFilters();
 
@@ -248,7 +248,7 @@ final class ValidationSearchSiretTest extends TestCase
 
     public function testThrowsIfSortingIsInvalid(): void
     {
-        $validator = new SearchSiretValidator();
+        $validator = new SearchFacilityBySiretValidator();
 
         $sorting = new SearchSiretSorting();
         $sorting->field = 'invalid field';
@@ -265,7 +265,7 @@ final class ValidationSearchSiretTest extends TestCase
 
     public function testThrowsIfSortingOrderIsNull(): void
     {
-        $validator = new SearchSiretValidator();
+        $validator = new SearchFacilityBySiretValidator();
 
         $sorting = new SearchSiretSorting();
         $sorting->field = 'siret';

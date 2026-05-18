@@ -15,9 +15,9 @@ use App\Directory\Enum\FacilityType;
 use App\Directory\Enum\LegalUnitAdministrativeStatus;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-final class GetSiretByIdInstanceTest extends WebTestCase
+final class GetFacilityBySiretTest extends WebTestCase
 {
-    public function testGetSiretByIdInstance(): void
+    public function testGetFacilityBySiret(): void
     {
         $client = self::createClient();
         $container = self::getContainer();
@@ -79,7 +79,7 @@ final class GetSiretByIdInstanceTest extends WebTestCase
         $em->persist($entity);
         $em->flush();
 
-        $client->request('GET', '/v1/siret/id-instance:1');
+        $client->request('GET', '/v1/siret/code-insee:12345678900000');
 
         self::assertResponseIsSuccessful();
 
@@ -115,12 +115,12 @@ final class GetSiretByIdInstanceTest extends WebTestCase
     {
         $client = self::createClient();
 
-        $client->request('GET', '/v1/siret/id-instance:999999');
+        $client->request('GET', '/v1/siret/code-insee:00000000000000');
 
         self::assertResponseStatusCodeSame(404);
     }
 
-    public function testGetSiretByIdInstanceWithFields(): void
+    public function testGetFacilityBySiretWithFields(): void
     {
         $client = self::createClient();
         $container = self::getContainer();
@@ -182,7 +182,7 @@ final class GetSiretByIdInstanceTest extends WebTestCase
         $em->persist($entity);
         $em->flush();
 
-        $client->request('GET', '/v1/siret/id-instance:1',
+        $client->request('GET', '/v1/siret/code-insee:12345678900000',
         [
             'fields' => ['siret', 'name', 'facilityType', 'address', 'pmOnly']
         ]);

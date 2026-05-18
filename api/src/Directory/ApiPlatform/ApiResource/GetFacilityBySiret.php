@@ -7,7 +7,7 @@ namespace App\Directory\ApiPlatform\ApiResource;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\QueryParameter;
-use App\Directory\ApiPlatform\StateProvider\GetSiretBySiretNumberProvider;
+use App\Directory\ApiPlatform\StateProvider\GetFacilityBySiretProvider;
 use App\Directory\ValueObjects\FacilityPayloadHistoryOutput;
 
 #[ApiResource(operations: [
@@ -16,13 +16,13 @@ use App\Directory\ValueObjects\FacilityPayloadHistoryOutput;
         outputFormats: ['json'],
         output: FacilityPayloadHistoryOutput::class,
         validate: false,
-        name: 'GetSiretBySiretNumber',
-        provider: GetSiretBySiretNumberProvider::class,
+        name: 'getFacilityBySiret',
+        provider: GetFacilityBySiretProvider::class,
         parameters: [
             'fields' => new QueryParameter(),
         ],
     ),
 ])]
-final class GetSiretBySiretNumber
+final class GetFacilityBySiret
 {
 }

@@ -5,18 +5,17 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Directory;
 
 use App\Common\Exception\InvalidInputException;
-use App\Directory\Validation\GetCompanyByIdValidator;
-use App\Directory\Validation\GetSiretBySiretNumberValidator;
+use App\Directory\Validation\GetFacilityByIdValidator;
 use PHPUnit\Framework\TestCase;
 
-final class ValidationGetSiretBySiretNumberTest extends TestCase
+final class ValidationGetFacilityByIdTest extends TestCase
 {
-    public function testValidateWithValidSirenAndFields(): void
+    public function testValidateWithValidIdAndFields(): void
     {
-        $validator = new GetSiretBySiretNumberValidator();
+        $validator = new GetFacilityByIdValidator();
 
         $validator->validate(
-            '12345678900000',
+            1,
             [
                 "siret",
                 "siren",
@@ -38,38 +37,28 @@ final class ValidationGetSiretBySiretNumberTest extends TestCase
         self::assertTrue(true);
     }
 
-    public function testValidateWithSiretAndWithoutFields(): void
+    public function testValidateWithIdAndWithoutFields(): void
     {
-        $validator = new GetSiretBySiretNumberValidator();
+        $validator = new GetFacilityByIdValidator();
 
-        $validator->validate('12345678900000');
+        $validator->validate(1);
 
         self::assertTrue(true);
     }
 
-    public function testThrowsIfSiretIsEmpty(): void
+    public function testThrowsIfIdInstanceIsZero(): void
     {
-        $validator = new GetSiretBySiretNumberValidator();
+        $validator = new GetFacilityByIdValidator();
 
         $this->expectException(InvalidInputException::class);
-        $this->expectExceptionMessage('siret cannot be empty');
+        $this->expectExceptionMessage('idInstance cannot be 0');
 
-        $validator->validate('');
-    }
-
-    public function testThrowsIfSiretIsInvalid(): void
-    {
-        $validator = new GetSiretBySiretNumberValidator();
-
-        $this->expectException(InvalidInputException::class);
-        $this->expectExceptionMessage('siret must be exactly 14 digits (0-9)');
-
-        $validator->validate('invalid siret');
+        $validator->validate(0);
     }
 
     public function testThrowsIfFieldIsNotString(): void
     {
-        $validator = new GetCompanyByIdValidator();
+        $validator = new GetFacilityByIdValidator();
 
         $this->expectException(InvalidInputException::class);
         $this->expectExceptionMessage('fields must be an array of strings');
@@ -82,7 +71,7 @@ final class ValidationGetSiretBySiretNumberTest extends TestCase
 
     public function testThrowsIfFieldIsNotAllowed(): void
     {
-        $validator = new GetCompanyByIdValidator();
+        $validator = new GetFacilityByIdValidator();
 
         $this->expectException(InvalidInputException::class);
 

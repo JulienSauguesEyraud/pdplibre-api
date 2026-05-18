@@ -10,20 +10,20 @@ use ApiPlatform\State\ProviderInterface;
 use App\Common\ApiPlatform\ApiValidationException;
 use App\Common\Exception\InvalidInputException;
 use App\Common\Exception\ObjectNotFoundException;
-use App\Directory\Actions\GetSiretBySiretNumber as GetSiretBySiretNumberAction;
-use App\Directory\ApiPlatform\ApiResource\GetSiretBySiretNumber;
-use App\Directory\Validation\GetSiretBySiretNumberValidator;
+use App\Directory\Actions\GetFacilityBySiret as GetFacilityBySiretAction;
+use App\Directory\ApiPlatform\ApiResource\GetFacilityBySiret;
+use App\Directory\Validation\GetFacilityBySiretValidator;
 use App\User\Doctrine\Entity\ApiConsumer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-final class GetSiretBySiretNumberProvider implements ProviderInterface
+final class GetFacilityBySiretProvider implements ProviderInterface
 {
     public function __construct(
-        private TokenStorageInterface $tokenStorage,
-        private  GetSiretBySiretNumberAction $action,
-        private GetSiretBySiretNumberValidator $validator,
+        private TokenStorageInterface       $tokenStorage,
+        private GetFacilityBySiretAction    $action,
+        private GetFacilityBySiretValidator $validator,
     ) {
     }
 
@@ -33,8 +33,8 @@ final class GetSiretBySiretNumberProvider implements ProviderInterface
 
         $currentUser = $this->tokenStorage->getToken()?->getUser();
         assert($currentUser instanceof ApiConsumer);
-        assert('GetSiretBySiretNumber' === $operation->getName());
-        assert(GetSiretBySiretNumber::class === $operation->getClass());
+        assert('getFacilityBySiret' === $operation->getName());
+        assert(GetFacilityBySiret::class === $operation->getClass());
 
         assert(isset($uriVariables['siret']));
 
