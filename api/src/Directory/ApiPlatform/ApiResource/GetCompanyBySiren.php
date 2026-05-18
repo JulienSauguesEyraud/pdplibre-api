@@ -7,7 +7,7 @@ namespace App\Directory\ApiPlatform\ApiResource;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\QueryParameter;
-use App\Directory\ApiPlatform\StateProvider\GetSirenBySirenNumberProvider;
+use App\Directory\ApiPlatform\StateProvider\GetCompanyBySirenProvider;
 use App\Directory\ValueObjects\LegalUnitPayloadHistoryOutput;
 
 #[ApiResource(operations: [
@@ -16,13 +16,13 @@ use App\Directory\ValueObjects\LegalUnitPayloadHistoryOutput;
         outputFormats: ['json'],
         output: LegalUnitPayloadHistoryOutput::class,
         validate: false,
-        name: 'GetSirenBySirenNumber',
-        provider: GetSirenBySirenNumberProvider::class,
+        name: 'getCompanyBySiren',
+        provider: GetCompanyBySirenProvider::class,
         parameters: [
             'fields' => new QueryParameter(),
         ],
     ),
 ])]
-final class GetSirenBySirenNumber
+final class GetCompanyBySiren
 {
 }

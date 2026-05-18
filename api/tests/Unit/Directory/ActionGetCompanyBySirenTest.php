@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Directory;
 
 use App\Common\Exception\ObjectNotFoundException;
-use App\Directory\Actions\GetSirenByIdInstance;
-use App\Directory\Actions\GetSirenBySirenNumber;
+use App\Directory\Actions\GetCompanyBySiren;
 use App\Directory\Doctrine\Entity\LegalUnitPayloadHistory;
 use App\Directory\Enum\EntityType;
 use App\Directory\Enum\LegalUnitAdministrativeStatus;
 use App\Directory\Repository\LegalUnitPayloadHistoryRepository;
 use PHPUnit\Framework\TestCase;
 
-final class ActionGetSirenBySirenNumberTest extends TestCase
+final class ActionGetCompanyBySirenTest extends TestCase
 {
     public function testReturnsOutput(): void
     {
@@ -33,7 +32,7 @@ final class ActionGetSirenBySirenNumberTest extends TestCase
             ->with('123456789')
             ->willReturn($entity);
 
-        $action = new GetSirenBySirenNumber($repository);
+        $action = new GetCompanyBySiren($repository);
 
         $result = $action->__invoke('123456789');
 
@@ -62,7 +61,7 @@ final class ActionGetSirenBySirenNumberTest extends TestCase
             ->with('123456789')
             ->willReturn($entity);
 
-        $action = new GetSirenBySirenNumber($repository);
+        $action = new GetCompanyBySiren($repository);
 
         $result = $action->__invoke('123456789', ['siren', 'businessName']);
 
@@ -81,7 +80,7 @@ final class ActionGetSirenBySirenNumberTest extends TestCase
             ->method('getSirenBySirenNumber')
             ->willReturn(null);
 
-        $action = new GetSirenBySirenNumber($repository);
+        $action = new GetCompanyBySiren($repository);
 
         $this->expectException(ObjectNotFoundException::class);
 

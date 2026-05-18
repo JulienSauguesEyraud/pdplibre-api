@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Directory;
 
-use App\Directory\Actions\SearchSiren;
 use App\Directory\Actions\SearchSiret;
-use App\Directory\ApiPlatform\ApiResource\SirenSearchRequestResource;
 use App\Directory\ApiPlatform\ApiResource\SiretSearchRequestResource;
 use App\Directory\Doctrine\Entity\AddressRead;
 use App\Directory\Doctrine\Entity\B2gAdditionalData;
@@ -18,15 +16,10 @@ use App\Directory\Enum\FacilityAdministrativeStatus;
 use App\Directory\Enum\FacilityType;
 use App\Directory\Enum\LegalUnitAdministrativeStatus;
 use App\Directory\Enum\Order;
-use App\Directory\Input\SearchSirenFilters;
-use App\Directory\Input\SearchSirenFiltersAdministrativeStatus;
-use App\Directory\Input\SearchSirenFiltersBusinessName;
-use App\Directory\Input\SearchSirenSorting;
 use App\Directory\Input\SearchSiretFilters;
 use App\Directory\Input\SearchSiretFiltersName;
 use App\Directory\Input\SearchSiretSorting;
 use App\Directory\Repository\FacilityPayloadHistoryRepository;
-use App\Directory\Repository\LegalUnitPayloadHistoryRepository;
 use PHPUnit\Framework\TestCase;
 
 final class ActionSearchSiretTest extends TestCase

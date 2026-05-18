@@ -10,13 +10,12 @@ use App\Directory\Enum\LegalUnitAdministrativeStatus;
 use App\Directory\Enum\Order;
 use App\Directory\Input\SearchSirenFilters;
 use App\Directory\Input\SearchSirenFiltersBusinessName;
-use App\Directory\Input\SearchSirenSorting;
-use App\Directory\Input\SearchSiretFilters;
+use App\Directory\Input\SearchSirenSortingInner;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-final class SearchSirenTest extends WebTestCase
+final class SearchCompanyBySirenTest extends WebTestCase
 {
-    public function testSearchSiren(): void
+    public function testSearchCompanyBySiren(): void
     {
         $client = self::createClient();
         $container = self::getContainer();
@@ -74,7 +73,7 @@ final class SearchSirenTest extends WebTestCase
         self::assertSame('A', $response['results'][0]['administrativeStatus']);
     }
 
-    public function testSearchSirenWithFields(): void
+    public function testSearchCompanyBySirenWithFields(): void
     {
         $client = self::createClient();
         $container = self::getContainer();
@@ -138,7 +137,7 @@ final class SearchSirenTest extends WebTestCase
         self::assertArrayNotHasKey('administrativeStatus', $response['results'][0]);
     }
 
-    public function testSearchSirenWithSorting(): void
+    public function testSearchCompanyBySirenWithSorting(): void
     {
         $client = self::createClient();
         $container = self::getContainer();
@@ -166,7 +165,7 @@ final class SearchSirenTest extends WebTestCase
         $businessNameFilter->businessName = 'test business name';
         $filters->businessName = $businessNameFilter;
 
-        $sorting = new SearchSirenSorting();
+        $sorting = new SearchSirenSortingInner();
         $sorting->field = 'siren';
         $sorting->order = Order::ascending;
 
@@ -203,7 +202,7 @@ final class SearchSirenTest extends WebTestCase
         self::assertSame('A', $response['results'][0]['administrativeStatus']);
     }
 
-    public function testSearchSirenWithLimit(): void
+    public function testSearchCompanyBySirenWithLimit(): void
     {
         $client = self::createClient();
         $container = self::getContainer();

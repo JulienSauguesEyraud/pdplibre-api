@@ -8,17 +8,16 @@ use App\Common\Exception\InvalidInputException;
 use App\Directory\Enum\Order;
 use App\Directory\Input\SearchSirenFilters;
 use App\Directory\Input\SearchSirenFiltersBusinessName;
-use App\Directory\Input\SearchSirenFiltersEntityType;
 use App\Directory\Input\SearchSirenFiltersSiren;
-use App\Directory\Input\SearchSirenSorting;
-use App\Directory\Validation\SearchSirenValidator;
+use App\Directory\Input\SearchSirenSortingInner;
+use App\Directory\Validation\SearchCompanyBySirenValidator;
 use PHPUnit\Framework\TestCase;
 
-final class ValidationSearchSirenTest extends TestCase
+final class ValidationSearchCompanyBySirenTest extends TestCase
 {
     public function testValidateWithValidFieldsFiltersAndSorting(): void
     {
-        $validator = new SearchSirenValidator();
+        $validator = new SearchCompanyBySirenValidator();
 
         $filters = new SearchSirenFilters();
 
@@ -31,11 +30,11 @@ final class ValidationSearchSirenTest extends TestCase
         $filters->siren = $sirenFilter;
         $filters->businessName = $businessNameFilter;
 
-        $sorting = new SearchSirenSorting();
+        $sorting = new SearchSirenSortingInner();
         $sorting->field = 'siren';
         $sorting->order = Order::ascending;
 
-        $sorting2 = new SearchSirenSorting();
+        $sorting2 = new SearchSirenSortingInner();
         $sorting2->field = 'businessName';
         $sorting2->order = Order::descending;
 
@@ -56,7 +55,7 @@ final class ValidationSearchSirenTest extends TestCase
 
     public function testThrowsIfFieldIsNotString(): void
     {
-        $validator = new SearchSirenValidator();
+        $validator = new SearchCompanyBySirenValidator();
 
         $this->expectException(InvalidInputException::class);
         $this->expectExceptionMessage(
@@ -82,7 +81,7 @@ final class ValidationSearchSirenTest extends TestCase
 
     public function testThrowsIfFieldIsInvalid(): void
     {
-        $validator = new SearchSirenValidator();
+        $validator = new SearchCompanyBySirenValidator();
 
         $this->expectException(InvalidInputException::class);
         $this->expectExceptionMessage(
@@ -108,7 +107,7 @@ final class ValidationSearchSirenTest extends TestCase
 
     public function testThrowsIfSirenFilterIsInvalid(): void
     {
-        $validator = new SearchSirenValidator();
+        $validator = new SearchCompanyBySirenValidator();
 
         $filters = new SearchSirenFilters();
 
@@ -129,7 +128,7 @@ final class ValidationSearchSirenTest extends TestCase
 
     public function testThrowsIfBusinessNameFilterIsEmpty(): void
     {
-        $validator = new SearchSirenValidator();
+        $validator = new SearchCompanyBySirenValidator();
 
         $filters = new SearchSirenFilters();
 
@@ -150,9 +149,9 @@ final class ValidationSearchSirenTest extends TestCase
 
     public function testThrowsIfSortingIsInvalid(): void
     {
-        $validator = new SearchSirenValidator();
+        $validator = new SearchCompanyBySirenValidator();
 
-        $sorting = new SearchSirenSorting();
+        $sorting = new SearchSirenSortingInner();
         $sorting->field = 'invalid field';
         $sorting->order = Order::ascending;
 
@@ -178,9 +177,9 @@ final class ValidationSearchSirenTest extends TestCase
 
     public function testThrowsIfSortingOrderIsNull(): void
     {
-        $validator = new SearchSirenValidator();
+        $validator = new SearchCompanyBySirenValidator();
 
-        $sorting = new SearchSirenSorting();
+        $sorting = new SearchSirenSortingInner();
         $sorting->field = 'siren';
 
         $this->expectException(InvalidInputException::class);

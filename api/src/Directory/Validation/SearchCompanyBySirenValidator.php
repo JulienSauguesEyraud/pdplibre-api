@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace App\Directory\Validation;
 
 use App\Common\Exception\InvalidInputException;
-use App\Directory\Enum\EntityType;
-use App\Directory\Enum\LegalUnitAdministrativeStatus;
 use App\Directory\Input\SearchSirenFilters;
-use App\Directory\Input\SearchSirenSorting;
+use App\Directory\Input\SearchSirenSortingInner;
 
-final readonly class SearchSirenValidator
+final readonly class SearchCompanyBySirenValidator
 {
     private const ALLOWED_FIELDS = [
         'siren',
@@ -21,7 +19,7 @@ final readonly class SearchSirenValidator
     ];
 
     /**
-     * @param array<SearchSirenSorting> $sorting
+     * @param array<SearchSirenSortingInner> $sorting
      */
     public function validate(SearchSirenFilters $filters, ?array $fields = null, ?array $sorting = null): void
     {
@@ -68,7 +66,7 @@ final readonly class SearchSirenValidator
     }
 
     /**
-     * @param array<SearchSirenSorting> $sorting
+     * @param array<SearchSirenSortingInner> $sorting
      */
     private function validateSorting(?array $sorting): void
     {

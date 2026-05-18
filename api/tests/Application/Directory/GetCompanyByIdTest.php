@@ -9,9 +9,9 @@ use App\Directory\Enum\EntityType;
 use App\Directory\Enum\LegalUnitAdministrativeStatus;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-final class GetSirenBySirenNumberTest extends WebTestCase
+final class GetCompanyByIdTest extends WebTestCase
 {
-    public function testGetSirenBySirenNumber(): void
+    public function testGetCompanyById(): void
     {
         $client = self::createClient();
         $container = self::getContainer();
@@ -34,7 +34,7 @@ final class GetSirenBySirenNumberTest extends WebTestCase
         $em->persist($entity);
         $em->flush();
 
-        $client->request('GET', '/v1/siren/code-insee:123456789');
+        $client->request('GET', '/v1/siren/id-instance:1');
 
         self::assertResponseIsSuccessful();
 
@@ -47,7 +47,7 @@ final class GetSirenBySirenNumberTest extends WebTestCase
         self::assertSame('A', $response['administrativeStatus']);
     }
 
-    public function testGetSirenBySirenNumberWithFields(): void
+    public function testGetCompanyByIdWithFields(): void
     {
         $client = self::createClient();
         $container = self::getContainer();
@@ -70,10 +70,10 @@ final class GetSirenBySirenNumberTest extends WebTestCase
         $em->persist($entity);
         $em->flush();
 
-        $client->request('GET', '/v1/siren/code-insee:123456789',
-            [
-                'fields' => ['siren', 'businessName']
-            ]);
+        $client->request('GET', '/v1/siren/id-instance:1',
+        [
+            'fields' => ['siren', 'businessName']
+        ]);
 
         self::assertResponseIsSuccessful();
 
@@ -90,7 +90,7 @@ final class GetSirenBySirenNumberTest extends WebTestCase
     {
         $client = self::createClient();
 
-        $client->request('GET', '/v1/siren/code-insee:000000000');
+        $client->request('GET', '/v1/siren/id-instance:999999');
 
         self::assertResponseStatusCodeSame(404);
     }

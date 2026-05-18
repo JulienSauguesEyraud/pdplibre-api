@@ -5,18 +5,17 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Directory;
 
 use App\Common\Exception\InvalidInputException;
-use App\Directory\Validation\GetSirenByIdInstanceValidator;
-use App\Directory\Validation\GetSirenBySirenNumberValidator;
+use App\Directory\Validation\GetCompanyByIdValidator;
 use PHPUnit\Framework\TestCase;
 
-final class ValidationGetSirenBySirenNumberTest extends TestCase
+final class ValidationGetCompanyByIdTest extends TestCase
 {
-    public function testValidateWithValidSirenAndFields(): void
+    public function testValidateWithValidIdAndFields(): void
     {
-        $validator = new GetSirenBySirenNumberValidator();
+        $validator = new GetCompanyByIdValidator();
 
         $validator->validate(
-            '123456789',
+            1,
             [
                 'siren',
                 'businessName',
@@ -29,38 +28,28 @@ final class ValidationGetSirenBySirenNumberTest extends TestCase
         self::assertTrue(true);
     }
 
-    public function testValidateWithSirenAndWithoutFields(): void
+    public function testValidateWithIdAndWithoutFields(): void
     {
-        $validator = new GetSirenBySirenNumberValidator();
+        $validator = new GetCompanyByIdValidator();
 
-        $validator->validate('123456789');
+        $validator->validate(1);
 
         self::assertTrue(true);
     }
 
-    public function testThrowsIfSirenIsEmpty(): void
+    public function testThrowsIfIdInstanceIsZero(): void
     {
-        $validator = new GetSirenBySirenNumberValidator();
+        $validator = new GetCompanyByIdValidator();
 
         $this->expectException(InvalidInputException::class);
-        $this->expectExceptionMessage('siren cannot be empty');
+        $this->expectExceptionMessage('idInstance cannot be 0');
 
-        $validator->validate('');
-    }
-
-    public function testThrowsIfSirenIsInvalid(): void
-    {
-        $validator = new GetSirenBySirenNumberValidator();
-
-        $this->expectException(InvalidInputException::class);
-        $this->expectExceptionMessage('siren must be exactly 9 digits (0-9)');
-
-        $validator->validate('invalid siren');
+        $validator->validate(0);
     }
 
     public function testThrowsIfFieldIsNotString(): void
     {
-        $validator = new GetSirenByIdInstanceValidator();
+        $validator = new GetCompanyByIdValidator();
 
         $this->expectException(InvalidInputException::class);
         $this->expectExceptionMessage('fields must be an array of strings');
@@ -73,7 +62,7 @@ final class ValidationGetSirenBySirenNumberTest extends TestCase
 
     public function testThrowsIfFieldIsNotAllowed(): void
     {
-        $validator = new GetSirenByIdInstanceValidator();
+        $validator = new GetCompanyByIdValidator();
 
         $this->expectException(InvalidInputException::class);
         $this->expectExceptionMessage(

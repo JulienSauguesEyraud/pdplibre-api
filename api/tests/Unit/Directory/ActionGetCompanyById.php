@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Directory;
 
 use App\Common\Exception\ObjectNotFoundException;
-use App\Directory\Actions\GetSirenByIdInstance;
+use App\Directory\Actions\GetCompanyById;
 use App\Directory\Doctrine\Entity\LegalUnitPayloadHistory;
 use App\Directory\Enum\EntityType;
 use App\Directory\Enum\LegalUnitAdministrativeStatus;
 use App\Directory\Repository\LegalUnitPayloadHistoryRepository;
 use PHPUnit\Framework\TestCase;
 
-final class ActionGetSirenByIdInstanceTest extends TestCase
+final class ActionGetCompanyById extends TestCase
 {
     public function testReturnsOutput(): void
     {
@@ -32,7 +32,7 @@ final class ActionGetSirenByIdInstanceTest extends TestCase
             ->with(1)
             ->willReturn($entity);
 
-        $action = new GetSirenByIdInstance($repository);
+        $action = new GetCompanyById($repository);
 
         $result = $action->__invoke(1);
 
@@ -61,7 +61,7 @@ final class ActionGetSirenByIdInstanceTest extends TestCase
             ->with(1)
             ->willReturn($entity);
 
-        $action = new GetSirenByIdInstance($repository);
+        $action = new GetCompanyById($repository);
 
         $result = $action->__invoke(1, ['siren', 'businessName']);
 
@@ -80,7 +80,7 @@ final class ActionGetSirenByIdInstanceTest extends TestCase
             ->method('getSirenByIdInstance')
             ->willReturn(null);
 
-        $action = new GetSirenByIdInstance($repository);
+        $action = new GetCompanyById($repository);
 
         $this->expectException(ObjectNotFoundException::class);
 

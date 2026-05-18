@@ -6,7 +6,7 @@ namespace App\Directory\Validation;
 
 use App\Common\Exception\InvalidInputException;
 
-final readonly class GetSirenBySirenNumberValidator
+final readonly class GetCompanyBySirenValidator
 {
     private const ALLOWED_FIELDS = [
         'siren',

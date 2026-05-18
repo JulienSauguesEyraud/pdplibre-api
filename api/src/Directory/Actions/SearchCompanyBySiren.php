@@ -4,20 +4,19 @@ declare(strict_types=1);
 
 namespace App\Directory\Actions;
 
-use App\Directory\ApiPlatform\ApiResource\SirenSearchRequestResource;
+use App\Directory\ApiPlatform\ApiResource\SearchCompanyBySiren as SearchCompanyBySirenResource;
 use App\Directory\Repository\LegalUnitPayloadHistoryRepository;
 use App\Directory\ValueObjects\LegalUnitPayloadHistoryOutput;
 use App\Directory\ValueObjects\SearchSirenInput;
-use App\User\Doctrine\Entity\ApiConsumer;
 
-final readonly class SearchSiren
+final readonly class SearchCompanyBySiren
 {
     public function __construct(
         private LegalUnitPayloadHistoryRepository $repository,
     ) {
     }
 
-    public function __invoke(SirenSearchRequestResource $input): SearchSirenInput
+    public function __invoke(SearchCompanyBySirenResource $input): SearchSirenInput
     {
         $entities = $this->repository->search(
             $input->filters,

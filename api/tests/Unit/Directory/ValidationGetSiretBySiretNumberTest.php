@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Directory;
 
 use App\Common\Exception\InvalidInputException;
-use App\Directory\Validation\GetSirenByIdInstanceValidator;
+use App\Directory\Validation\GetCompanyByIdValidator;
 use App\Directory\Validation\GetSiretBySiretNumberValidator;
 use PHPUnit\Framework\TestCase;
 
@@ -69,7 +69,7 @@ final class ValidationGetSiretBySiretNumberTest extends TestCase
 
     public function testThrowsIfFieldIsNotString(): void
     {
-        $validator = new GetSirenByIdInstanceValidator();
+        $validator = new GetCompanyByIdValidator();
 
         $this->expectException(InvalidInputException::class);
         $this->expectExceptionMessage('fields must be an array of strings');
@@ -82,7 +82,7 @@ final class ValidationGetSiretBySiretNumberTest extends TestCase
 
     public function testThrowsIfFieldIsNotAllowed(): void
     {
-        $validator = new GetSirenByIdInstanceValidator();
+        $validator = new GetCompanyByIdValidator();
 
         $this->expectException(InvalidInputException::class);
 

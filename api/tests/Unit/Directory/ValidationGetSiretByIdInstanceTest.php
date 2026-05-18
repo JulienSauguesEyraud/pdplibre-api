@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Directory;
 
 use App\Common\Exception\InvalidInputException;
-use App\Directory\Validation\GetSirenByIdInstanceValidator;
 use App\Directory\Validation\GetSiretByIdInstanceValidator;
 use PHPUnit\Framework\TestCase;
 

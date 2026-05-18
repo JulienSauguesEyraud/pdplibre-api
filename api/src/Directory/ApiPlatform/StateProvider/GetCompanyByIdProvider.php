@@ -10,20 +10,20 @@ use ApiPlatform\State\ProviderInterface;
 use App\Common\ApiPlatform\ApiValidationException;
 use App\Common\Exception\InvalidInputException;
 use App\Common\Exception\ObjectNotFoundException;
-use App\Directory\ApiPlatform\ApiResource\GetSirenBySirenNumber;
-use App\Directory\Actions\GetSirenBySirenNumber as GetSirenBySirenNumberAction;
-use App\Directory\Validation\GetSirenBySirenNumberValidator;
+use App\Directory\ApiPlatform\ApiResource\GetCompanyById;
+use App\Directory\Actions\GetCompanyById as GetCompanyByIdAction;
+use App\Directory\Validation\GetCompanyByIdValidator;
 use App\User\Doctrine\Entity\ApiConsumer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-final class GetSirenBySirenNumberProvider implements ProviderInterface
+final class GetCompanyByIdProvider implements ProviderInterface
 {
     public function __construct(
-        private TokenStorageInterface $tokenStorage,
-        private GetSirenBySirenNumberAction $action,
-        private GetSirenBySirenNumberValidator $validator,
+        private TokenStorageInterface   $tokenStorage,
+        private GetCompanyByIdAction    $action,
+        private GetCompanyByIdValidator $validator,
     ) {
     }
 
@@ -33,10 +33,10 @@ final class GetSirenBySirenNumberProvider implements ProviderInterface
 
         $currentUser = $this->tokenStorage->getToken()?->getUser();
         assert($currentUser instanceof ApiConsumer);
-        assert('GetSirenBySirenNumber' === $operation->getName());
-        assert(GetSirenBySirenNumber::class === $operation->getClass());
+        assert('getCompanyById' === $operation->getName());
+        assert(GetCompanyById::class === $operation->getClass());
 
-        assert(isset($uriVariables['siren']));
+        assert(isset($uriVariables['idInstance']));
 
         /** @var Request|null $request */
         $request = $context['request'] ?? null;
@@ -44,8 +44,8 @@ final class GetSirenBySirenNumberProvider implements ProviderInterface
         $fields = $request?->query->all('fields');
 
         try {
-            $this->validator->validate($uriVariables['siren'], $fields);
-            $result = $this->action->__invoke($uriVariables['siren'], $fields);
+            $this->validator->validate((int)$uriVariables['idInstance'], $fields);
+            $result = $this->action->__invoke((int)$uriVariables['idInstance'], $fields);
         } catch (ObjectNotFoundException $e) {
             throw new NotFoundHttpException($e->getMessage(), $e);
         } catch (InvalidInputException $e) {

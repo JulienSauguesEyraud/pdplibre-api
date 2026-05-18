@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Directory\ValueObjects;
 
 use App\Directory\Input\SearchSirenFilters;
-use App\Directory\Input\SearchSirenSorting;
+use App\Directory\Input\SearchSirenSortingInner;
 
 final readonly class SearchSirenInput
 {
@@ -13,7 +13,7 @@ final readonly class SearchSirenInput
      * @param array<LegalUnitPayloadHistoryOutput> $results
      */
     /**
-     * @param array<SearchSirenSorting> $sorting
+     * @param array<SearchSirenSortingInner> $sorting
      */
     public function __construct(
         public ?int $limit = 25,

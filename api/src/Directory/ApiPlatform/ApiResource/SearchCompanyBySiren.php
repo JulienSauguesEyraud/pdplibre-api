@@ -9,15 +9,11 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Response;
-use App\Directory\ApiPlatform\StateProcessor\SearchSirenProcessor;
+use App\Directory\ApiPlatform\StateProcessor\SearchCompanyBySirenProcessor;
 use App\Directory\Enum\Order;
 use App\Directory\Input\LegalUnitPayloadHistoryInput;
 use App\Directory\Input\SearchSirenFilters;
-use App\Directory\Input\SearchSirenSorting;
-use App\Directory\Input\SearchSiretSorting;
-use App\Flow\ApiPlatform\StateProcessor\SearchFlowProcessor;
-use App\Flow\Input\SearchFlowFilters;
-use App\Flow\ValueObjects\SearchFlowInput;
+use App\Directory\Input\SearchSirenSortingInner;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(operations: [
@@ -44,11 +40,11 @@ use Symfony\Component\Validator\Constraints as Assert;
             description: 'Multi-criteria company search.',
         ),
         output: LegalUnitPayloadHistoryInput::class,
-        name: 'searchSiren',
-        processor: SearchSirenProcessor::class,
+        name: 'searchCompanyBySiren',
+        processor: SearchCompanyBySirenProcessor::class,
     ),
 ])]
-final class SirenSearchRequestResource
+final class SearchCompanyBySiren
 {
     #[Assert\Range(min: 1, max: 100)]
     #[ApiProperty(
@@ -62,10 +58,10 @@ final class SirenSearchRequestResource
     public SearchSirenFilters $filters;
 
     /**
-     * @var array<SearchSirenSorting>|null
+     * @var array<SearchSirenSortingInner>|null
      */
     #[Assert\All(constraints: [
-        new Assert\Type(SearchSirenSorting::class),
+        new Assert\Type(SearchSirenSortingInner::class),
     ])]
     public ?array $sorting = null;
 
@@ -82,7 +78,7 @@ final class SirenSearchRequestResource
         }
 
         foreach ($sorting as $sort) {
-            $sortingObj = new SearchSirenSorting();
+            $sortingObj = new SearchSirenSortingInner();
             $sortingObj->field = $sort['field'] ?? null;
             $sortingObj->order = Order::from($sort['order']) ?? null;
             $this->sorting[] = $sortingObj;

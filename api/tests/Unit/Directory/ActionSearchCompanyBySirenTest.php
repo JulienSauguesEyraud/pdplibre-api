@@ -4,20 +4,19 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Directory;
 
-use App\Directory\Actions\SearchSiren;
-use App\Directory\ApiPlatform\ApiResource\SirenSearchRequestResource;
+use App\Directory\Actions\SearchCompanyBySiren as SearchCompanyBySirenAction;
+use App\Directory\ApiPlatform\ApiResource\SearchCompanyBySiren;
 use App\Directory\Doctrine\Entity\LegalUnitPayloadHistory;
 use App\Directory\Enum\EntityType;
 use App\Directory\Enum\LegalUnitAdministrativeStatus;
 use App\Directory\Enum\Order;
 use App\Directory\Input\SearchSirenFilters;
-use App\Directory\Input\SearchSirenFiltersAdministrativeStatus;
 use App\Directory\Input\SearchSirenFiltersBusinessName;
-use App\Directory\Input\SearchSirenSorting;
+use App\Directory\Input\SearchSirenSortingInner;
 use App\Directory\Repository\LegalUnitPayloadHistoryRepository;
 use PHPUnit\Framework\TestCase;
 
-final class ActionSearchSirenTest extends TestCase
+final class ActionSearchCompanyBySirenTest extends TestCase
 {
     public function testReturnsMappedResults(): void
     {
@@ -33,7 +32,7 @@ final class ActionSearchSirenTest extends TestCase
         $filters->businessName = new SearchSirenFiltersBusinessName();
         $filters->businessName->businessName = 'test business name';
 
-        $input = new SirenSearchRequestResource();
+        $input = new SearchCompanyBySiren();
         $input->filters = $filters;
 
         $repository = $this->createMock(LegalUnitPayloadHistoryRepository::class);
@@ -44,7 +43,7 @@ final class ActionSearchSirenTest extends TestCase
             ->with($filters)
             ->willReturn([$entity]);
 
-        $action = new SearchSiren($repository);
+        $action = new SearchCompanyBySirenAction($repository);
 
         $result = $action->__invoke($input);
 
@@ -73,11 +72,11 @@ final class ActionSearchSirenTest extends TestCase
         $filters->businessName = new SearchSirenFiltersBusinessName();
         $filters->businessName->businessName = 'test business name';
 
-        $sort1 = new SearchSirenSorting();
+        $sort1 = new SearchSirenSortingInner();
         $sort1->order = Order::ascending;
         $sort1->field = 'siren';
 
-        $sort2 = new SearchSirenSorting();
+        $sort2 = new SearchSirenSortingInner();
         $sort2->order = Order::descending;
         $sort2->field = 'administrativeStatus';
 
@@ -86,7 +85,7 @@ final class ActionSearchSirenTest extends TestCase
             $sort2
         ];
 
-        $input = new SirenSearchRequestResource();
+        $input = new SearchCompanyBySiren();
         $input->filters = $filters;
         $input->sorting = $sorting;
 
@@ -101,7 +100,7 @@ final class ActionSearchSirenTest extends TestCase
             )
             ->willReturn([$entity]);
 
-        $action = new SearchSiren($repository);
+        $action = new SearchCompanyBySirenAction($repository);
 
         $result = $action->__invoke($input);
 
@@ -130,7 +129,7 @@ final class ActionSearchSirenTest extends TestCase
         $filters->businessName = new SearchSirenFiltersBusinessName();
         $filters->businessName->businessName = 'test business name';
 
-        $input = new SirenSearchRequestResource();
+        $input = new SearchCompanyBySiren();
         $input->limit = 10;
         $input->filters = $filters;
 
@@ -146,7 +145,7 @@ final class ActionSearchSirenTest extends TestCase
             )
             ->willReturn([$entity]);
 
-        $action = new SearchSiren($repository);
+        $action = new SearchCompanyBySirenAction($repository);
 
         $result = $action->__invoke($input);
 
@@ -180,7 +179,7 @@ final class ActionSearchSirenTest extends TestCase
             'businessName',
         ];
 
-        $input = new SirenSearchRequestResource();
+        $input = new SearchCompanyBySiren();
         $input->filters = $filters;
         $input->fields = $fields;
 
@@ -192,7 +191,7 @@ final class ActionSearchSirenTest extends TestCase
             ->with($filters)
             ->willReturn([$entity]);
 
-        $action = new SearchSiren($repository);
+        $action = new SearchCompanyBySirenAction($repository);
 
         $result = $action->__invoke($input);
 
@@ -222,7 +221,7 @@ final class ActionSearchSirenTest extends TestCase
             'businessName',
         ];
 
-        $input = new SirenSearchRequestResource();
+        $input = new SearchCompanyBySiren();
         $input->limit = 10;
         $input->filters = $filters;
         $input->sorting = $sorting;
@@ -240,7 +239,7 @@ final class ActionSearchSirenTest extends TestCase
             )
             ->willReturn([]);
 
-        $action = new SearchSiren($repository);
+        $action = new SearchCompanyBySirenAction($repository);
 
         $result = $action->__invoke($input);
 

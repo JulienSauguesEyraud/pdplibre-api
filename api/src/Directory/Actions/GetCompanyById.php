@@ -7,7 +7,8 @@ namespace App\Directory\Actions;
 use App\Directory\Repository\LegalUnitPayloadHistoryRepository;
 use App\Directory\ValueObjects\LegalUnitPayloadHistoryOutput;
 use App\Common\Exception\ObjectNotFoundException;
-final readonly class GetSirenByIdInstance
+
+final readonly class GetCompanyById
 {
     public function __construct(
         private LegalUnitPayloadHistoryRepository $repository,

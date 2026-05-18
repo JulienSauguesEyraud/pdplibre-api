@@ -6,7 +6,7 @@ namespace App\Directory\Input;
 
 use App\Directory\Enum\Order;
 
-final class SearchSirenSorting
+final class SearchSirenSortingInner
 {
     public ?string $field = null;
     public ?Order $order = null;

@@ -10,9 +10,9 @@ use ApiPlatform\State\ProcessorInterface;
 use App\Common\ApiPlatform\ApiValidationException;
 use App\Common\Exception\InvalidInputException;
 use App\Common\Exception\ObjectNotFoundException;
-use App\Directory\Actions\SearchSiren;
-use App\Directory\ApiPlatform\ApiResource\SirenSearchRequestResource;
-use App\Directory\Validation\SearchSirenValidator;
+use App\Directory\Actions\SearchCompanyBySiren as SearchCompanyBySirenAction;
+use App\Directory\ApiPlatform\ApiResource\SearchCompanyBySiren;
+use App\Directory\Validation\SearchCompanyBySirenValidator;
 use App\Directory\ValueObjects\SearchSirenInput;
 use App\User\Doctrine\Entity\ApiConsumer;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,13 +20,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class SearchSirenProcessor implements ProcessorInterface
+final class SearchCompanyBySirenProcessor implements ProcessorInterface
 {
     public function __construct(
-        private TokenStorageInterface $tokenStorage,
-        private SearchSiren $action,
-        private SearchSirenValidator $validator,
-        private TranslatorInterface $translator,
+        private TokenStorageInterface         $tokenStorage,
+        private SearchCompanyBySirenAction    $action,
+        private SearchCompanyBySirenValidator $validator,
+        private TranslatorInterface           $translator,
     ) {
     }
 
@@ -37,12 +37,12 @@ final class SearchSirenProcessor implements ProcessorInterface
 
         $currentUser = $this->tokenStorage->getToken()?->getUser();
 
-        assert($data instanceof SirenSearchRequestResource);
+        assert($data instanceof SearchCompanyBySiren);
         assert($operation instanceof Post);
         assert($request instanceof Request);
         assert($currentUser instanceof ApiConsumer);
         assert('searchSiren' === $operation->getName());
-        assert(SirenSearchRequestResource::class === $operation->getClass());
+        assert(SearchCompanyBySiren::class === $operation->getClass());
 
         try {
             $this->validator->validate($data->filters, $data->fields, $data->sorting);

@@ -6,7 +6,7 @@ namespace App\Directory\Repository;
 
 use App\Directory\Doctrine\Entity\LegalUnitPayloadHistory;
 use App\Directory\Input\SearchSirenFilters;
-use App\Directory\Input\SearchSirenSorting;
+use App\Directory\Input\SearchSirenSortingInner;
 
 interface LegalUnitPayloadHistoryRepository
 {
@@ -34,7 +34,7 @@ interface LegalUnitPayloadHistoryRepository
      * @return array<LegalUnitPayloadHistory>
      */
     /**
-     * @param array<SearchSirenSorting> $sorting
+     * @param array<SearchSirenSortingInner> $sorting
      */
     public function search(SearchSirenFilters $filters, ?array $sorting, ?int $limit): array;
 }
