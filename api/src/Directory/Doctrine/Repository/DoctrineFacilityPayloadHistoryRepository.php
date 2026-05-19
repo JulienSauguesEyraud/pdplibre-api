@@ -26,51 +26,51 @@ final class DoctrineFacilityPayloadHistoryRepository extends ServiceEntityReposi
     public function getSiretByIdInstance(int $id): ?FacilityPayloadHistory
     {
         return $this->findOneBy([
-            'idInstance' => $id
+            'idInstance' => $id,
         ]);
     }
 
     public function getSiretBySiretNumber(string $siret): ?FacilityPayloadHistory
     {
         return $this->findOneBy([
-            'siret' => $siret
+            'siret' => $siret,
         ]);
     }
 
-    //TODO rajouter ignore
-    //TODO rajouter include
+    // TODO rajouter ignore
+    // TODO rajouter include
     public function search(SearchSiretFilters $filters, ?array $sorting, ?int $limit): array
     {
         $qb = $this->createQueryBuilder('FacilityPayloadHistory')
             ->leftJoin('FacilityPayloadHistory.address', 'address')
             ->setMaxResults($limit);
 
-        if (null !== $filters->siret && $filters->siret->operator === ContainsOperator::opContains) {
+        if (null !== $filters->siret && ContainsOperator::opContains === $filters->siret->operator) {
             $qb->andWhere('FacilityPayloadHistory.siret LIKE :siret')
                 ->setParameter('siret', '%'.$filters->siret->siret.'%');
         }
 
-        if (null !== $filters->siren && $filters->siren->operator === ContainsOperator::opContains) {
+        if (null !== $filters->siren && ContainsOperator::opContains === $filters->siren->operator) {
             $qb->andWhere('FacilityPayloadHistory.siren LIKE :siren')
                 ->setParameter('siren', '%'.$filters->siren->siren.'%');
         }
 
-        if (null !== $filters->name && $filters->name->operator === ContainsOperator::opContains) {
+        if (null !== $filters->name && ContainsOperator::opContains === $filters->name->operator) {
             $qb->andWhere('FacilityPayloadHistory.name LIKE :name')
                 ->setParameter('name', '%'.$filters->name->name.'%');
         }
 
-        if (null !== $filters->facilityType && $filters->facilityType->operator === ContainsOperator::opContains) {
+        if (null !== $filters->facilityType && ContainsOperator::opContains === $filters->facilityType->operator) {
             $qb->andWhere('FacilityPayloadHistory.facilityType IN (:facilityType)')
                 ->setParameter('facilityType', $filters->facilityType->entityType);
         }
 
-        if (null !== $filters->administrativeStatus && $filters->administrativeStatus->operator === StrictOperator::opStrict) {
+        if (null !== $filters->administrativeStatus && StrictOperator::opStrict === $filters->administrativeStatus->operator) {
             $qb->andWhere('FacilityPayloadHistory.administrativeStatus = :administrativeStatus')
                 ->setParameter('administrativeStatus', $filters->administrativeStatus->administrativeStatus);
         }
 
-        if (null !== $filters->addressLines && $filters->addressLines->operator === ContainsOperator::opContains) {
+        if (null !== $filters->addressLines && ContainsOperator::opContains === $filters->addressLines->operator) {
             $qb
                 ->andWhere(
                     $qb->expr()->orX(
@@ -82,30 +82,29 @@ final class DoctrineFacilityPayloadHistoryRepository extends ServiceEntityReposi
                 ->setParameter('addressLines', '%'.$filters->addressLines->addressLines.'%');
         }
 
-        if (null !== $filters->postalCode && $filters->postalCode->operator === ContainsOperator::opContains) {
+        if (null !== $filters->postalCode && ContainsOperator::opContains === $filters->postalCode->operator) {
             $qb
                 ->andWhere('address.postalCode LIKE :postalCode')
                 ->setParameter('postalCode', '%'.$filters->postalCode->postalCode.'%');
         }
 
-        if (null !== $filters->countrySubdivision && $filters->countrySubdivision->operator === ContainsOperator::opContains) {
+        if (null !== $filters->countrySubdivision && ContainsOperator::opContains === $filters->countrySubdivision->operator) {
             $qb
                 ->andWhere('address.countrySubdivision LIKE :countrySubdivision')
                 ->setParameter('countrySubdivision', '%'.$filters->countrySubdivision->countrySubdivision.'%');
         }
 
-        if (null !== $filters->locality && $filters->locality->operator === ContainsOperator::opContains) {
+        if (null !== $filters->locality && ContainsOperator::opContains === $filters->locality->operator) {
             $qb
                 ->andWhere('address.locality LIKE :locality')
                 ->setParameter('locality', '%'.$filters->locality->locality.'%');
         }
 
         foreach ($sorting as $sort) {
-            if($sort->order === Order::ascending) {
-                $qb->addOrderBy('FacilityPayloadHistory.' . $sort->field, 'ASC');
-            }
-            elseif($sort->order === Order::descending) {
-                $qb->addOrderBy('FacilityPayloadHistory.' . $sort->field, 'DESC');
+            if (Order::ascending === $sort->order) {
+                $qb->addOrderBy('FacilityPayloadHistory.'.$sort->field, 'ASC');
+            } elseif (Order::descending === $sort->order) {
+                $qb->addOrderBy('FacilityPayloadHistory.'.$sort->field, 'DESC');
             }
         }
 

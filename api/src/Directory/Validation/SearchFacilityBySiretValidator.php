@@ -11,20 +11,20 @@ use App\Directory\Input\SearchSiretSorting;
 final readonly class SearchFacilityBySiretValidator
 {
     private const ALLOWED_FIELDS = [
-        "siret",
-        "siren",
-        "name",
-        "facilityType",
-        "address",
-        "diffusible",
-        "administrativeStatus",
-        "pmStatus",
-        "pmOnly",
-        "managesPaymentStatus",
-        "managesLegalCommitment",
-        "managesLegalCommitmentOrService",
-        "serviceCodeStatus",
-        "idInstance"
+        'siret',
+        'siren',
+        'name',
+        'facilityType',
+        'address',
+        'diffusible',
+        'administrativeStatus',
+        'pmStatus',
+        'pmOnly',
+        'managesPaymentStatus',
+        'managesLegalCommitment',
+        'managesLegalCommitmentOrService',
+        'serviceCodeStatus',
+        'idInstance',
     ];
 
     /**
@@ -49,57 +49,33 @@ final readonly class SearchFacilityBySiretValidator
             }
 
             if (!in_array($field, self::ALLOWED_FIELDS, true)) {
-                throw new InvalidInputException(
-                    'fields',
-                    sprintf('Invalid field "%s". Allowed: %s', $field, implode(', ', self::ALLOWED_FIELDS))
-                );
+                throw new InvalidInputException('fields', sprintf('Invalid field "%s". Allowed: %s', $field, implode(', ', self::ALLOWED_FIELDS)));
             }
         }
     }
 
     private function validateFilters(?SearchSiretFilters $filters): void
     {
-        if ($filters->siret !== null && !preg_match('/^\d{14}$/', $filters->siret->siret)) {
-            throw new InvalidInputException(
-                'siret',
-                'siret must be exactly 14 digits (0-9)'
-            );
+        if (null !== $filters->siret && !preg_match('/^\d{14}$/', $filters->siret->siret)) {
+            throw new InvalidInputException('siret', 'siret must be exactly 14 digits (0-9)');
         }
-        if ($filters->siren !== null && !preg_match('/^\d{9}$/', $filters->siren->siren)) {
-            throw new InvalidInputException(
-                'siren',
-                'siren must be exactly 9 digits (0-9)'
-            );
+        if (null !== $filters->siren && !preg_match('/^\d{9}$/', $filters->siren->siren)) {
+            throw new InvalidInputException('siren', 'siren must be exactly 9 digits (0-9)');
         }
-        if ($filters->postalCode !== null && !preg_match('/^\d{5}$/', $filters->postalCode->postalCode)) {
-            throw new InvalidInputException(
-                'postalCode',
-                'postalCode must be exactly 5 digits (0-9)'
-            );
+        if (null !== $filters->postalCode && !preg_match('/^\d{5}$/', $filters->postalCode->postalCode)) {
+            throw new InvalidInputException('postalCode', 'postalCode must be exactly 5 digits (0-9)');
         }
-        if($filters->name !== null && $filters->name->name === '') {
-            throw new InvalidInputException(
-                'name',
-                'name cannot be empty'
-            );
+        if (null !== $filters->name && '' === $filters->name->name) {
+            throw new InvalidInputException('name', 'name cannot be empty');
         }
-        if($filters->addressLines !== null && $filters->addressLines->addressLines === '') {
-            throw new InvalidInputException(
-                'addressLines',
-                'addressLines cannot be empty'
-            );
+        if (null !== $filters->addressLines && '' === $filters->addressLines->addressLines) {
+            throw new InvalidInputException('addressLines', 'addressLines cannot be empty');
         }
-        if($filters->countrySubdivision !== null && $filters->countrySubdivision->countrySubdivision === '') {
-            throw new InvalidInputException(
-                'countrySubdivision',
-                'countrySubdivision cannot be empty'
-            );
+        if (null !== $filters->countrySubdivision && '' === $filters->countrySubdivision->countrySubdivision) {
+            throw new InvalidInputException('countrySubdivision', 'countrySubdivision cannot be empty');
         }
-        if($filters->locality !== null && $filters->locality->locality === '') {
-            throw new InvalidInputException(
-                'locality',
-                'locality cannot be empty'
-            );
+        if (null !== $filters->locality && '' === $filters->locality->locality) {
+            throw new InvalidInputException('locality', 'locality cannot be empty');
         }
     }
 
@@ -118,13 +94,10 @@ final readonly class SearchFacilityBySiretValidator
             }
 
             if (!in_array($sort->field, self::ALLOWED_FIELDS, true)) {
-                throw new InvalidInputException(
-                    'fields',
-                    sprintf('Invalid field "%s". Allowed: %s', $sort->field, implode(', ', self::ALLOWED_FIELDS))
-                );
+                throw new InvalidInputException('fields', sprintf('Invalid field "%s". Allowed: %s', $sort->field, implode(', ', self::ALLOWED_FIELDS)));
             }
 
-            if(!$sort->order) {
+            if (!$sort->order) {
                 throw new InvalidInputException('sorting', 'Sorting order must exist');
             }
         }

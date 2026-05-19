@@ -17,11 +17,11 @@ final readonly class SearchSirenInput
      */
     public function __construct(
         public ?int $limit = 25,
-         // TODO public ?int $ignore = null,
+        // TODO public ?int $ignore = null,
         public SearchSirenFilters $filters,
         public ?array $sorting = null,
         public ?array $fields = null,
-        public ?array $results = null
+        public ?array $results = null,
     ) {
     }
 }

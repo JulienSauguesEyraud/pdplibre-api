@@ -204,6 +204,4 @@ final class ValidationSearchCompanyBySirenTest extends TestCase
             [$sorting],
         );
     }
-
-
 }

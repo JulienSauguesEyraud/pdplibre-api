@@ -29,10 +29,7 @@ final readonly class GetCompanyBySirenValidator
         }
 
         if (!preg_match('/^\d{9}$/', $siren)) {
-            throw new InvalidInputException(
-                'siren',
-                'siren must be exactly 9 digits (0-9)'
-            );
+            throw new InvalidInputException('siren', 'siren must be exactly 9 digits (0-9)');
         }
     }
 
@@ -48,10 +45,7 @@ final readonly class GetCompanyBySirenValidator
             }
 
             if (!in_array($field, self::ALLOWED_FIELDS, true)) {
-                throw new InvalidInputException(
-                    'fields',
-                    sprintf('Invalid field "%s". Allowed: %s', $field, implode(', ', self::ALLOWED_FIELDS))
-                );
+                throw new InvalidInputException('fields', sprintf('Invalid field "%s". Allowed: %s', $field, implode(', ', self::ALLOWED_FIELDS)));
             }
         }
     }

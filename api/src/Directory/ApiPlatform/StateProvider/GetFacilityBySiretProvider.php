@@ -21,8 +21,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 final class GetFacilityBySiretProvider implements ProviderInterface
 {
     public function __construct(
-        private TokenStorageInterface       $tokenStorage,
-        private GetFacilityBySiretAction    $action,
+        private TokenStorageInterface $tokenStorage,
+        private GetFacilityBySiretAction $action,
         private GetFacilityBySiretValidator $validator,
     ) {
     }
@@ -37,7 +37,6 @@ final class GetFacilityBySiretProvider implements ProviderInterface
         assert(GetFacilityBySiret::class === $operation->getClass());
 
         assert(isset($uriVariables['siret']));
-
 
         /** @var Request|null $request */
         $request = $context['request'] ?? null;

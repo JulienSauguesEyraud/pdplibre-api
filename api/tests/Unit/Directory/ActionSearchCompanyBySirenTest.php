@@ -82,7 +82,7 @@ final class ActionSearchCompanyBySirenTest extends TestCase
 
         $sorting = [
             $sort1,
-            $sort2
+            $sort2,
         ];
 
         $input = new SearchCompanyBySiren();

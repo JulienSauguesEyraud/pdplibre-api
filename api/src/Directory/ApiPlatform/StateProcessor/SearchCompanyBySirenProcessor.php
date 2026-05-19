@@ -23,10 +23,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class SearchCompanyBySirenProcessor implements ProcessorInterface
 {
     public function __construct(
-        private TokenStorageInterface         $tokenStorage,
-        private SearchCompanyBySirenAction    $action,
+        private TokenStorageInterface $tokenStorage,
+        private SearchCompanyBySirenAction $action,
         private SearchCompanyBySirenValidator $validator,
-        private TranslatorInterface           $translator,
+        private TranslatorInterface $translator,
     ) {
     }
 
@@ -46,6 +46,7 @@ final class SearchCompanyBySirenProcessor implements ProcessorInterface
 
         try {
             $this->validator->validate($data->filters, $data->fields, $data->sorting);
+
             return $this->action->__invoke($data);
         } catch (ObjectNotFoundException $e) {
             throw new NotFoundHttpException($e->getMessage(), $e);

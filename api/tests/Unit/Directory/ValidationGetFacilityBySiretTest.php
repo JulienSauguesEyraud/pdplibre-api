@@ -18,20 +18,20 @@ final class ValidationGetFacilityBySiretTest extends TestCase
         $validator->validate(
             '12345678900000',
             [
-                "siret",
-                "siren",
-                "name",
-                "facilityType",
-                "address",
-                "diffusible",
-                "administrativeStatus",
-                "pmStatus",
-                "pmOnly",
-                "managesPaymentStatus",
-                "managesLegalCommitment",
-                "managesLegalCommitmentOrService",
-                "serviceCodeStatus",
-                "idInstance"
+                'siret',
+                'siren',
+                'name',
+                'facilityType',
+                'address',
+                'diffusible',
+                'administrativeStatus',
+                'pmStatus',
+                'pmOnly',
+                'managesPaymentStatus',
+                'managesLegalCommitment',
+                'managesLegalCommitmentOrService',
+                'serviceCodeStatus',
+                'idInstance',
             ]
         );
 

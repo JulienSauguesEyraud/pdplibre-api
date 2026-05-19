@@ -41,10 +41,7 @@ final readonly class GetCompanyByIdValidator
             }
 
             if (!in_array($field, self::ALLOWED_FIELDS, true)) {
-                throw new InvalidInputException(
-                    'fields',
-                    sprintf('Invalid field "%s". Allowed: %s', $field, implode(', ', self::ALLOWED_FIELDS))
-                );
+                throw new InvalidInputException('fields', sprintf('Invalid field "%s". Allowed: %s', $field, implode(', ', self::ALLOWED_FIELDS)));
             }
         }
     }

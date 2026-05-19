@@ -72,7 +72,7 @@ final class GetCompanyBySirenTest extends WebTestCase
 
         $client->request('GET', '/v1/siren/code-insee:123456789',
             [
-                'fields' => ['siren', 'businessName']
+                'fields' => ['siren', 'businessName'],
             ]);
 
         self::assertResponseIsSuccessful();

@@ -37,7 +37,7 @@ final class ActionSearchFacilityBySiretTest extends TestCase
         $addressEntity->method('getCountryCode')->willReturn('FR');
         $addressEntity->method('getCountryName')->willReturn('France');
 
-        $b2gAdditionalDataEntity = $this->createMock(B2GAdditionalData::class);
+        $b2gAdditionalDataEntity = $this->createMock(B2gAdditionalData::class);
 
         $b2gAdditionalDataEntity->method('getPm')->willReturn(true);
         $b2gAdditionalDataEntity->method('getPmOnly')->willReturn(true);
@@ -131,7 +131,7 @@ final class ActionSearchFacilityBySiretTest extends TestCase
         $addressEntity->method('getCountryCode')->willReturn('FR');
         $addressEntity->method('getCountryName')->willReturn('France');
 
-        $b2gAdditionalDataEntity = $this->createMock(B2GAdditionalData::class);
+        $b2gAdditionalDataEntity = $this->createMock(B2gAdditionalData::class);
 
         $b2gAdditionalDataEntity->method('getPm')->willReturn(true);
         $b2gAdditionalDataEntity->method('getPmOnly')->willReturn(true);
@@ -174,7 +174,7 @@ final class ActionSearchFacilityBySiretTest extends TestCase
 
         $sorting = [
             $sort1,
-            $sort2
+            $sort2,
         ];
 
         $input = new SearchFacilityBySiret();
@@ -242,7 +242,7 @@ final class ActionSearchFacilityBySiretTest extends TestCase
         $addressEntity->method('getCountryCode')->willReturn('FR');
         $addressEntity->method('getCountryName')->willReturn('France');
 
-        $b2gAdditionalDataEntity = $this->createMock(B2GAdditionalData::class);
+        $b2gAdditionalDataEntity = $this->createMock(B2gAdditionalData::class);
 
         $b2gAdditionalDataEntity->method('getPm')->willReturn(true);
         $b2gAdditionalDataEntity->method('getPmOnly')->willReturn(true);
@@ -341,7 +341,7 @@ final class ActionSearchFacilityBySiretTest extends TestCase
         $addressEntity->method('getCountryCode')->willReturn('FR');
         $addressEntity->method('getCountryName')->willReturn('France');
 
-        $b2gAdditionalDataEntity = $this->createMock(B2GAdditionalData::class);
+        $b2gAdditionalDataEntity = $this->createMock(B2gAdditionalData::class);
 
         $b2gAdditionalDataEntity->method('getPm')->willReturn(true);
         $b2gAdditionalDataEntity->method('getPmOnly')->willReturn(true);
@@ -379,7 +379,7 @@ final class ActionSearchFacilityBySiretTest extends TestCase
             'name',
             'facilityType',
             'address',
-            'pmOnly'
+            'pmOnly',
         ];
 
         $input = new SearchFacilityBySiret();
@@ -430,7 +430,6 @@ final class ActionSearchFacilityBySiretTest extends TestCase
         self::assertSame(EntityType::Public, $result->results[0]->legalUnit->entityType);
         self::assertSame(LegalUnitAdministrativeStatus::A, $result->results[0]->legalUnit->administrativeStatus);
     }
-
 
     public function testReturnsEmptyResults(): void
     {

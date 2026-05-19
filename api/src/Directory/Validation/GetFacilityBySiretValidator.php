@@ -9,20 +9,20 @@ use App\Common\Exception\InvalidInputException;
 final readonly class GetFacilityBySiretValidator
 {
     private const ALLOWED_FIELDS = [
-        "siret",
-        "siren",
-        "name",
-        "facilityType",
-        "address",
-        "diffusible",
-        "administrativeStatus",
-        "pmStatus",
-        "pmOnly",
-        "managesPaymentStatus",
-        "managesLegalCommitment",
-        "managesLegalCommitmentOrService",
-        "serviceCodeStatus",
-        "idInstance"
+        'siret',
+        'siren',
+        'name',
+        'facilityType',
+        'address',
+        'diffusible',
+        'administrativeStatus',
+        'pmStatus',
+        'pmOnly',
+        'managesPaymentStatus',
+        'managesLegalCommitment',
+        'managesLegalCommitmentOrService',
+        'serviceCodeStatus',
+        'idInstance',
     ];
 
     public function validate(string $siret, ?array $fields = null): void
@@ -38,10 +38,7 @@ final readonly class GetFacilityBySiretValidator
         }
 
         if (!preg_match('/^\d{14}$/', $siret)) {
-            throw new InvalidInputException(
-                'siret',
-                'siret must be exactly 14 digits (0-9)'
-            );
+            throw new InvalidInputException('siret', 'siret must be exactly 14 digits (0-9)');
         }
     }
 
@@ -57,10 +54,7 @@ final readonly class GetFacilityBySiretValidator
             }
 
             if (!in_array($field, self::ALLOWED_FIELDS, true)) {
-                throw new InvalidInputException(
-                    'fields',
-                    sprintf('Invalid field "%s". Allowed: %s', $field, implode(', ', self::ALLOWED_FIELDS))
-                );
+                throw new InvalidInputException('fields', sprintf('Invalid field "%s". Allowed: %s', $field, implode(', ', self::ALLOWED_FIELDS)));
             }
         }
     }

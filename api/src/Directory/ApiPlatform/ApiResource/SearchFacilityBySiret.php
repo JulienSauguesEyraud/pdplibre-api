@@ -72,8 +72,9 @@ final class SearchFacilityBySiret
 
     public function setSorting(?array $sorting): void
     {
-        if ($sorting === null) {
+        if (null === $sorting) {
             $this->sorting = null;
+
             return;
         }
 

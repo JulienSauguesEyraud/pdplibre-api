@@ -17,12 +17,12 @@ final readonly class SearchSiretInput
      */
     public function __construct(
         public ?int $limit = 25,
-         // TODO public int $ignore,
-         // TODO $include
+        // TODO public int $ignore,
+        // TODO $include
         public SearchSiretFilters $filters,
         public ?array $sorting = null,
         public ?array $fields = null,
-        public ?array $results = null
+        public ?array $results = null,
     ) {
     }
 }

@@ -71,9 +71,9 @@ final class GetCompanyByIdTest extends WebTestCase
         $em->flush();
 
         $client->request('GET', '/v1/siren/id-instance:1',
-        [
-            'fields' => ['siren', 'businessName']
-        ]);
+            [
+                'fields' => ['siren', 'businessName'],
+            ]);
 
         self::assertResponseIsSuccessful();
 

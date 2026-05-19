@@ -9,20 +9,20 @@ use App\Common\Exception\InvalidInputException;
 final readonly class GetFacilityByIdValidator
 {
     private const ALLOWED_FIELDS = [
-        "siret",
-        "siren",
-        "name",
-        "facilityType",
-        "address",
-        "diffusible",
-        "administrativeStatus",
-        "pmStatus",
-        "pmOnly",
-        "managesPaymentStatus",
-        "managesLegalCommitment",
-        "managesLegalCommitmentOrService",
-        "serviceCodeStatus",
-        "idInstance"
+        'siret',
+        'siren',
+        'name',
+        'facilityType',
+        'address',
+        'diffusible',
+        'administrativeStatus',
+        'pmStatus',
+        'pmOnly',
+        'managesPaymentStatus',
+        'managesLegalCommitment',
+        'managesLegalCommitmentOrService',
+        'serviceCodeStatus',
+        'idInstance',
     ];
 
     public function validate(int $idInstance, ?array $fields = null): void
@@ -50,10 +50,7 @@ final readonly class GetFacilityByIdValidator
             }
 
             if (!in_array($field, self::ALLOWED_FIELDS, true)) {
-                throw new InvalidInputException(
-                    'fields',
-                    sprintf('Invalid field "%s". Allowed: %s', $field, implode(', ', self::ALLOWED_FIELDS))
-                );
+                throw new InvalidInputException('fields', sprintf('Invalid field "%s". Allowed: %s', $field, implode(', ', self::ALLOWED_FIELDS)));
             }
         }
     }

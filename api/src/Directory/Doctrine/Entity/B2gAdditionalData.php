@@ -4,16 +4,7 @@ declare(strict_types=1);
 
 namespace App\Directory\Doctrine\Entity;
 
-use App\Directory\Enum\DiffusionStatus;
-use App\Directory\Enum\EntityType;
-use App\Directory\Enum\FacilityAdministrativeStatus;
-use App\Directory\Enum\FacilityType;
-use App\Directory\Enum\LegalUnitAdministrativeStatus;
-use App\Directory\ValueObjects\AddressReadOutput;
-use App\Directory\ValueObjects\B2gAdditionalDataOutput;
-use App\Flow\Doctrine\Entity\Acknowledgement;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity]
 class B2gAdditionalData
@@ -50,8 +41,10 @@ class B2gAdditionalData
         $self->managesLegalCommitmentCode = $managesLegalCommitmentCode;
         $self->managesLegalCommitmentOrServiceCode = $serviceCodeStatus;
         $self->serviceCodeStatus = $serviceCodeStatus;
+
         return $self;
     }
+
     public function getPm(): bool
     {
         return $this->pm;

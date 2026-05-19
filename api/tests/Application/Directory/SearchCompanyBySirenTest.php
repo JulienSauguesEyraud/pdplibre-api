@@ -112,7 +112,7 @@ final class SearchCompanyBySirenTest extends WebTestCase
                     'siren',
                     'businessName',
                 ],
-                'filters' => $filters
+                'filters' => $filters,
             ])
         );
 
@@ -177,7 +177,7 @@ final class SearchCompanyBySirenTest extends WebTestCase
             ['CONTENT_TYPE' => 'application/json'],
             json_encode([
                 'filters' => $filters,
-                'sorting' => [$sorting]
+                'sorting' => [$sorting],
             ])
         );
 
@@ -259,13 +259,11 @@ final class SearchCompanyBySirenTest extends WebTestCase
         self::assertSame('test business name', $response['results'][0]['businessName']);
         self::assertSame('Public', $response['results'][0]['entityType']);
         self::assertSame('A', $response['results'][0]['administrativeStatus']);
-
     }
 
     public function testNoResult(): void
     {
         $client = self::createClient();
-
 
         $filters = new SearchSirenFilters();
         $businessNameFilter = new SearchSirenFiltersBusinessName();
@@ -279,7 +277,7 @@ final class SearchCompanyBySirenTest extends WebTestCase
             [],
             ['CONTENT_TYPE' => 'application/json'],
             json_encode([
-                'filters' => $filters
+                'filters' => $filters,
             ])
         );
 

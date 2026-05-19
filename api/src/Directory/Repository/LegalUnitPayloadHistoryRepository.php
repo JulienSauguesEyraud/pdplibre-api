@@ -27,9 +27,10 @@ interface LegalUnitPayloadHistoryRepository
     public function findOneBy(array $criteria, ?array $orderBy = null): ?object;
 
     public function getSirenByIdInstance(int $id): ?LegalUnitPayloadHistory;
+
     public function getSirenBySirenNumber(string $siren): ?LegalUnitPayloadHistory;
 
-    //TODO rajouter ignore
+    // TODO rajouter ignore
     /**
      * @return array<LegalUnitPayloadHistory>
      */

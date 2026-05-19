@@ -216,9 +216,9 @@ final class SearchFacilityBySiretTest extends WebTestCase
                     'name',
                     'facilityType',
                     'address',
-                    'pmOnly'
+                    'pmOnly',
                 ],
-                'filters' => $filters
+                'filters' => $filters,
             ])
         );
 
@@ -344,7 +344,7 @@ final class SearchFacilityBySiretTest extends WebTestCase
             ['CONTENT_TYPE' => 'application/json'],
             json_encode([
                 'filters' => $filters,
-                'sorting' => [$sorting]
+                'sorting' => [$sorting],
             ])
         );
 
@@ -503,7 +503,6 @@ final class SearchFacilityBySiretTest extends WebTestCase
         self::assertSame('test business name', $response['results'][0]['legalUnit']['businessName']);
         self::assertSame('Public', $response['results'][0]['legalUnit']['entityType']);
         self::assertSame('A', $response['results'][0]['legalUnit']['administrativeStatus']);
-
     }
 
     public function testNoResult(): void
@@ -522,7 +521,7 @@ final class SearchFacilityBySiretTest extends WebTestCase
             [],
             ['CONTENT_TYPE' => 'application/json'],
             json_encode([
-                'filters' => $filters
+                'filters' => $filters,
             ])
         );
 

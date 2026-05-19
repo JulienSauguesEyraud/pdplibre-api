@@ -33,7 +33,7 @@ final class ActionGetFacilityBySiretTest extends TestCase
         $addressEntity->method('getCountryCode')->willReturn('FR');
         $addressEntity->method('getCountryName')->willReturn('France');
 
-        $b2gAdditionalDataEntity = $this->createMock(B2GAdditionalData::class);
+        $b2gAdditionalDataEntity = $this->createMock(B2gAdditionalData::class);
 
         $b2gAdditionalDataEntity->method('getPm')->willReturn(true);
         $b2gAdditionalDataEntity->method('getPmOnly')->willReturn(true);
@@ -116,7 +116,7 @@ final class ActionGetFacilityBySiretTest extends TestCase
         $addressEntity->method('getCountryCode')->willReturn('FR');
         $addressEntity->method('getCountryName')->willReturn('France');
 
-        $b2gAdditionalDataEntity = $this->createMock(B2GAdditionalData::class);
+        $b2gAdditionalDataEntity = $this->createMock(B2gAdditionalData::class);
 
         $b2gAdditionalDataEntity->method('getPm')->willReturn(true);
         $b2gAdditionalDataEntity->method('getPmOnly')->willReturn(true);

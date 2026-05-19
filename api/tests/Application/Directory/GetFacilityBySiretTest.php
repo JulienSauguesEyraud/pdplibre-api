@@ -183,9 +183,9 @@ final class GetFacilityBySiretTest extends WebTestCase
         $em->flush();
 
         $client->request('GET', '/v1/siret/code-insee:12345678900000',
-        [
-            'fields' => ['siret', 'name', 'facilityType', 'address', 'pmOnly']
-        ]);
+            [
+                'fields' => ['siret', 'name', 'facilityType', 'address', 'pmOnly'],
+            ]);
 
         self::assertResponseIsSuccessful();
 

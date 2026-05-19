@@ -59,8 +59,10 @@ class FacilityPayloadHistory
         $self->address = $address;
         $self->b2gAdditionalData = $b2gAdditionalData;
         $self->legalUnit = $legalUnit;
+
         return $self;
     }
+
     public function getIdInstance(): int
     {
         return $this->idInstance;
@@ -75,6 +77,7 @@ class FacilityPayloadHistory
     {
         return $this->siret;
     }
+
     public function getName(): string
     {
         return $this->name;

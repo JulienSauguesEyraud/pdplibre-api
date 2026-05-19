@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace App\Directory\DTO;
 
 use App\Directory\Enum\DiffusionStatus;
-use App\Directory\Enum\EntityType;
 use App\Directory\Enum\FacilityAdministrativeStatus;
 use App\Directory\Enum\FacilityType;
-use App\Directory\Enum\LegalUnitAdministrativeStatus;
 
 class FacilityPayloadHistoryInfo
 {
@@ -23,7 +21,7 @@ class FacilityPayloadHistoryInfo
         public ?string $addressLines = null,
         public ?string $postalCode = null,
         public ?string $countrySubdivision = null,
-        public ?string $locality = null
+        public ?string $locality = null,
     ) {
     }
 }

@@ -10,8 +10,8 @@ use ApiPlatform\State\ProviderInterface;
 use App\Common\ApiPlatform\ApiValidationException;
 use App\Common\Exception\InvalidInputException;
 use App\Common\Exception\ObjectNotFoundException;
-use App\Directory\ApiPlatform\ApiResource\GetCompanyBySiren;
 use App\Directory\Actions\GetCompanyBySiren as GetCompanyBySirenAction;
+use App\Directory\ApiPlatform\ApiResource\GetCompanyBySiren;
 use App\Directory\Validation\GetCompanyBySirenValidator;
 use App\User\Doctrine\Entity\ApiConsumer;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,8 +21,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 final class GetCompanyBySirenProvider implements ProviderInterface
 {
     public function __construct(
-        private TokenStorageInterface      $tokenStorage,
-        private GetCompanyBySirenAction    $action,
+        private TokenStorageInterface $tokenStorage,
+        private GetCompanyBySirenAction $action,
         private GetCompanyBySirenValidator $validator,
     ) {
     }

@@ -49,6 +49,7 @@ class AddressRead
         $self->locality = $locality;
         $self->countryCode = $countryCode;
         $self->countryName = $countryName;
+
         return $self;
     }
 

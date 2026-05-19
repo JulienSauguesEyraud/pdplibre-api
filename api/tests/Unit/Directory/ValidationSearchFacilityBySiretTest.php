@@ -45,20 +45,20 @@ final class ValidationSearchFacilityBySiretTest extends TestCase
 
         $validator->validate(
             [
-                "siret",
-                "siren",
-                "name",
-                "facilityType",
-                "address",
-                "diffusible",
-                "administrativeStatus",
-                "pmStatus",
-                "pmOnly",
-                "managesPaymentStatus",
-                "managesLegalCommitment",
-                "managesLegalCommitmentOrService",
-                "serviceCodeStatus",
-                "idInstance"
+                'siret',
+                'siren',
+                'name',
+                'facilityType',
+                'address',
+                'diffusible',
+                'administrativeStatus',
+                'pmStatus',
+                'pmOnly',
+                'managesPaymentStatus',
+                'managesLegalCommitment',
+                'managesLegalCommitmentOrService',
+                'serviceCodeStatus',
+                'idInstance',
             ],
             $filters,
             [$sorting, $sorting2],
@@ -281,6 +281,4 @@ final class ValidationSearchFacilityBySiretTest extends TestCase
             [$sorting],
         );
     }
-
-
 }

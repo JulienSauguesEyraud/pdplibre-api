@@ -27,10 +27,11 @@ interface FacilityPayloadHistoryRepository
     public function findOneBy(array $criteria, ?array $orderBy = null): ?object;
 
     public function getSiretByIdInstance(int $id): ?FacilityPayloadHistory;
+
     public function getSiretBySiretNumber(string $siret): ?FacilityPayloadHistory;
 
-    //TODO rajouter ignore
-    //TODO rajouter include
+    // TODO rajouter ignore
+    // TODO rajouter include
     /**
      * @return array<FacilityPayloadHistory>
      */

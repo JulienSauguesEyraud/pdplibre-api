@@ -17,20 +17,20 @@ final class ValidationGetFacilityByIdTest extends TestCase
         $validator->validate(
             1,
             [
-                "siret",
-                "siren",
-                "name",
-                "facilityType",
-                "address",
-                "diffusible",
-                "administrativeStatus",
-                "pmStatus",
-                "pmOnly",
-                "managesPaymentStatus",
-                "managesLegalCommitment",
-                "managesLegalCommitmentOrService",
-                "serviceCodeStatus",
-                "idInstance"
+                'siret',
+                'siren',
+                'name',
+                'facilityType',
+                'address',
+                'diffusible',
+                'administrativeStatus',
+                'pmStatus',
+                'pmOnly',
+                'managesPaymentStatus',
+                'managesLegalCommitment',
+                'managesLegalCommitmentOrService',
+                'serviceCodeStatus',
+                'idInstance',
             ]
         );
 

@@ -16,7 +16,7 @@ final readonly class AddressReadOutput
         public string $countrySubdivision,
         public string $locality,
         public string $countryCode,
-        public string $countryName
+        public string $countryName,
     ) {
     }
 

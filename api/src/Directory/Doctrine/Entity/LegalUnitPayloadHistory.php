@@ -15,7 +15,7 @@ class LegalUnitPayloadHistory
     #[ORM\Column(name: 'id_instance', unique: true)]
     private int $idInstance;
 
-    #[ORM\Column(name: 'siren' ,length: 9)]
+    #[ORM\Column(name: 'siren', length: 9)]
     private string $siren;
 
     #[ORM\Column(name: 'business_name', length: 255)]
@@ -27,7 +27,8 @@ class LegalUnitPayloadHistory
     #[ORM\Column(name: 'administrative_status')]
     private LegalUnitAdministrativeStatus $administrativeStatus;
 
-    public static function create(int $idInstance, string $siren, string $businessName, EntityType $entityType, LegalUnitAdministrativeStatus $administrativeStatus,): self {
+    public static function create(int $idInstance, string $siren, string $businessName, EntityType $entityType, LegalUnitAdministrativeStatus $administrativeStatus): self
+    {
         $self = new self();
 
         $self->idInstance = $idInstance;

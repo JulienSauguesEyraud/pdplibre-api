@@ -62,8 +62,7 @@ final class FacilityPayloadHistoryOutput
 
         if ($returnAll) {
             $self->b2gAdditionalData = B2gAdditionalDataOutput::fromEntity($facilityPayloadHistory->getB2gAdditionalData());
-        }
-        else {
+        } else {
             $b2gAdditionalDataFields = [];
 
             if (in_array('pmStatus', $fields, true)) {

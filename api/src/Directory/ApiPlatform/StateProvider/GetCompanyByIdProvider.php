@@ -10,8 +10,8 @@ use ApiPlatform\State\ProviderInterface;
 use App\Common\ApiPlatform\ApiValidationException;
 use App\Common\Exception\InvalidInputException;
 use App\Common\Exception\ObjectNotFoundException;
-use App\Directory\ApiPlatform\ApiResource\GetCompanyById;
 use App\Directory\Actions\GetCompanyById as GetCompanyByIdAction;
+use App\Directory\ApiPlatform\ApiResource\GetCompanyById;
 use App\Directory\Validation\GetCompanyByIdValidator;
 use App\User\Doctrine\Entity\ApiConsumer;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,8 +21,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 final class GetCompanyByIdProvider implements ProviderInterface
 {
     public function __construct(
-        private TokenStorageInterface   $tokenStorage,
-        private GetCompanyByIdAction    $action,
+        private TokenStorageInterface $tokenStorage,
+        private GetCompanyByIdAction $action,
         private GetCompanyByIdValidator $validator,
     ) {
     }
@@ -44,8 +44,8 @@ final class GetCompanyByIdProvider implements ProviderInterface
         $fields = $request?->query->all('fields');
 
         try {
-            $this->validator->validate((int)$uriVariables['idInstance'], $fields);
-            $result = $this->action->__invoke((int)$uriVariables['idInstance'], $fields);
+            $this->validator->validate((int) $uriVariables['idInstance'], $fields);
+            $result = $this->action->__invoke((int) $uriVariables['idInstance'], $fields);
         } catch (ObjectNotFoundException $e) {
             throw new NotFoundHttpException($e->getMessage(), $e);
         } catch (InvalidInputException $e) {

@@ -21,8 +21,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 final class GetFacilityByIdProvider implements ProviderInterface
 {
     public function __construct(
-        private TokenStorageInterface    $tokenStorage,
-        private GetFacilityByIdAction    $action,
+        private TokenStorageInterface $tokenStorage,
+        private GetFacilityByIdAction $action,
         private GetFacilityByIdValidator $validator,
     ) {
     }
@@ -44,8 +44,8 @@ final class GetFacilityByIdProvider implements ProviderInterface
         $fields = $request?->query->all('fields');
 
         try {
-            $this->validator->validate((int)$uriVariables['idInstance'], $fields);
-            $result = $this->action->__invoke((int)$uriVariables['idInstance'], $fields);
+            $this->validator->validate((int) $uriVariables['idInstance'], $fields);
+            $result = $this->action->__invoke((int) $uriVariables['idInstance'], $fields);
         } catch (ObjectNotFoundException $e) {
             throw new NotFoundHttpException($e->getMessage(), $e);
         } catch (InvalidInputException $e) {
