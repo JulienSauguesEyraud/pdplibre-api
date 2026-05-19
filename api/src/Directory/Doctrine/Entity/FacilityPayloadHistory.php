@@ -10,10 +10,15 @@ use App\Directory\Enum\FacilityType;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
+#[ORM\UniqueConstraint(name: 'uniq_instance_version', columns: ['id_instance', 'version'])]
 class FacilityPayloadHistory
 {
     #[ORM\Id]
-    #[ORM\Column(name: 'id_instance', unique: true)]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(name: 'id', unique: true)]
+    private int $id;
+
+    #[ORM\Column(name: 'id_instance')]
     private int $idInstance;
 
     #[ORM\Column(name: 'siret', length: 14)]
@@ -34,19 +39,25 @@ class FacilityPayloadHistory
     #[ORM\Column(name: 'administrative_status')]
     private FacilityAdministrativeStatus $administrativeStatus;
 
-    #[ORM\OneToOne(cascade: ['persist'])]
+    #[ORM\ManyToOne(cascade: ['persist'])]
     #[ORM\JoinColumn(name: 'address_id', referencedColumnName: 'id', nullable: false)]
     private AddressRead $address;
 
-    #[ORM\OneToOne(cascade: ['persist'])]
+    #[ORM\ManyToOne(cascade: ['persist'])]
     #[ORM\JoinColumn(name: 'b2g_additional_data_id', referencedColumnName: 'id', nullable: false)]
     private B2gAdditionalData $b2gAdditionalData;
 
     #[ORM\ManyToOne(cascade: ['persist'])]
-    #[ORM\JoinColumn(name: 'legal_unit_id', referencedColumnName: 'id_instance', nullable: false)]
+    #[ORM\JoinColumn(name: 'legal_unit_id', referencedColumnName: 'id', nullable: false)]
     private LegalUnitPayloadHistory $legalUnit;
 
-    public static function create(int $idInstance, string $siret, string $siren, string $name, FacilityType $facilityType, DiffusionStatus $diffusible, FacilityAdministrativeStatus $administrativeStatus, AddressRead $address, B2gAdditionalData $b2gAdditionalData, LegalUnitPayloadHistory $legalUnit): FacilityPayloadHistory
+    #[ORM\Column(name: 'version')]
+    private int $version;
+
+    #[ORM\Column(name: 'updated_at')]
+    private \DateTimeImmutable $updatedAt;
+
+    public static function create(int $idInstance, string $siret, string $siren, string $name, FacilityType $facilityType, DiffusionStatus $diffusible, FacilityAdministrativeStatus $administrativeStatus, AddressRead $address, B2gAdditionalData $b2gAdditionalData, LegalUnitPayloadHistory $legalUnit, int $version = 1): FacilityPayloadHistory
     {
         $self = new self();
         $self->idInstance = $idInstance;
@@ -59,6 +70,9 @@ class FacilityPayloadHistory
         $self->address = $address;
         $self->b2gAdditionalData = $b2gAdditionalData;
         $self->legalUnit = $legalUnit;
+
+        $self->updatedAt = new \DateTimeImmutable();
+        $self->version = $version;
 
         return $self;
     }
@@ -111,5 +125,15 @@ class FacilityPayloadHistory
     public function getLegalUnit(): LegalUnitPayloadHistory
     {
         return $this->legalUnit;
+    }
+
+    public function getVersion(): int
+    {
+        return $this->version;
+    }
+
+    public function getUpdatedAt(): \DateTimeImmutable
+    {
+        return $this->updatedAt;
     }
 }

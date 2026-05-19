@@ -53,6 +53,11 @@ class AddressRead
         return $self;
     }
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
     public function getAddressLine1(): string
     {
         return $this->addressLine1;

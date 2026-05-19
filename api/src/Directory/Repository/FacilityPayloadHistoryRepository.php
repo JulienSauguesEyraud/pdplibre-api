@@ -26,9 +26,9 @@ interface FacilityPayloadHistoryRepository
      */
     public function findOneBy(array $criteria, ?array $orderBy = null): ?object;
 
-    public function getSiretByIdInstance(int $id): ?FacilityPayloadHistory;
+    public function getFacilityById(int $id): ?FacilityPayloadHistory;
 
-    public function getSiretBySiretNumber(string $siret): ?FacilityPayloadHistory;
+    public function getFacilityBySiret(string $siret): ?FacilityPayloadHistory;
 
     // TODO rajouter ignore
     // TODO rajouter include
@@ -38,5 +38,7 @@ interface FacilityPayloadHistoryRepository
     /**
      * @param array<SearchSiretSorting> $sorting
      */
-    public function search(SearchSiretFilters $filters, ?array $sorting, ?int $limit): array;
+    public function searchFacilityBySiret(SearchSiretFilters $filters, ?array $sorting, ?int $limit): array;
+
+    public function getMaxVersion(int $idInstance): int;
 }

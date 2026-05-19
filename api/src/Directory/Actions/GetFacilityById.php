@@ -17,7 +17,7 @@ final readonly class GetFacilityById
 
     public function __invoke(int $idInstance, ?array $fields = null): FacilityPayloadHistoryOutput
     {
-        $facilityPayloadHistory = $this->repository->getSiretByIdInstance($idInstance);
+        $facilityPayloadHistory = $this->repository->getFacilityById($idInstance);
 
         if (!$facilityPayloadHistory) {
             throw new ObjectNotFoundException('SIREN not found');

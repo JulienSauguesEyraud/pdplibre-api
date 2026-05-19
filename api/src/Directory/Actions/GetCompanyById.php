@@ -17,7 +17,7 @@ final readonly class GetCompanyById
 
     public function __invoke(int $idInstance, ?array $fields = null): LegalUnitPayloadHistoryOutput
     {
-        $legalUnitPayloadHistory = $this->repository->getSirenByIdInstance($idInstance);
+        $legalUnitPayloadHistory = $this->repository->getCompanyById($idInstance);
 
         if (!$legalUnitPayloadHistory) {
             throw new ObjectNotFoundException('SIREN not found');

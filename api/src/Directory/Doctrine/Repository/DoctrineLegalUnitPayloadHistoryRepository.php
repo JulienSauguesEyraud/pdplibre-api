@@ -23,24 +23,37 @@ final class DoctrineLegalUnitPayloadHistoryRepository extends ServiceEntityRepos
         parent::__construct($registry, LegalUnitPayloadHistory::class);
     }
 
-    public function getSirenByIdInstance(int $id): ?LegalUnitPayloadHistory
+    public function getCompanyById(int $id): ?LegalUnitPayloadHistory
     {
-        return $this->findOneBy([
-            'idInstance' => $id,
-        ]);
+        return $this->createQueryBuilder('legalUnitPayloadHistory')
+            ->where('legalUnitPayloadHistory.idInstance = :id')
+            ->setParameter('id', $id)
+            ->orderBy('legalUnitPayloadHistory.version', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
-    public function getSirenBySirenNumber(string $siren): ?LegalUnitPayloadHistory
+    public function getCompanyBySiren(string $siren): ?LegalUnitPayloadHistory
     {
-        return $this->findOneBy([
-            'siren' => $siren,
-        ]);
+        return $this->createQueryBuilder('legalUnitPayloadHistory')
+            ->where('legalUnitPayloadHistory.siren = :siren')
+            ->setParameter('siren', $siren)
+            ->orderBy('legalUnitPayloadHistory.version', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     // TODO rajouter ignore
-    public function search(SearchSirenFilters $filters, ?array $sorting, ?int $limit): array
+    public function searchCompanyBySiren(SearchSirenFilters $filters, ?array $sorting, ?int $limit): array
     {
         $qb = $this->createQueryBuilder('legalUnitPayloadHistory')
+            ->where('legalUnitPayloadHistory.version = (
+                SELECT MAX(legalUnitPayloadHistory2.version)
+                FROM App\Directory\Doctrine\Entity\LegalUnitPayloadHistory legalUnitPayloadHistory2
+                WHERE legalUnitPayloadHistory2.idInstance = legalUnitPayloadHistory.idInstance
+            )')
             ->setMaxResults($limit);
 
         if (null !== $filters->siren && ContainsOperator::opContains === $filters->siren->operator) {
@@ -72,5 +85,15 @@ final class DoctrineLegalUnitPayloadHistoryRepository extends ServiceEntityRepos
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function getMaxVersion(int $idInstance): int
+    {
+        return (int) $this->createQueryBuilder('legalUnitPayloadHistory')
+            ->select('MAX(legalUnitPayloadHistory.version)')
+            ->where('legalUnitPayloadHistory.idInstance = :id')
+            ->setParameter('id', $idInstance)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 }

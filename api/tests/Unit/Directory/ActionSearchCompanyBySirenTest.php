@@ -39,7 +39,7 @@ final class ActionSearchCompanyBySirenTest extends TestCase
 
         $repository
             ->expects($this->once())
-            ->method('search')
+            ->method('searchCompanyBySiren')
             ->with($filters)
             ->willReturn([$entity]);
 
@@ -93,7 +93,7 @@ final class ActionSearchCompanyBySirenTest extends TestCase
 
         $repository
             ->expects($this->once())
-            ->method('search')
+            ->method('searchCompanyBySiren')
             ->with(
                 $filters,
                 $sorting
@@ -137,7 +137,7 @@ final class ActionSearchCompanyBySirenTest extends TestCase
 
         $repository
             ->expects($this->once())
-            ->method('search')
+            ->method('searchCompanyBySiren')
             ->with(
                 $filters,
                 null,
@@ -187,7 +187,7 @@ final class ActionSearchCompanyBySirenTest extends TestCase
 
         $repository
             ->expects($this->once())
-            ->method('search')
+            ->method('searchCompanyBySiren')
             ->with($filters)
             ->willReturn([$entity]);
 
@@ -231,7 +231,7 @@ final class ActionSearchCompanyBySirenTest extends TestCase
 
         $repository
             ->expects($this->once())
-            ->method('search')
+            ->method('searchCompanyBySiren')
             ->with(
                 $filters,
                 $sorting,

@@ -28,7 +28,7 @@ final class ActionGetCompanyById extends TestCase
 
         $repository
             ->expects($this->once())
-            ->method('getSirenByIdInstance')
+            ->method('getCompanyById')
             ->with(1)
             ->willReturn($entity);
 
@@ -57,7 +57,7 @@ final class ActionGetCompanyById extends TestCase
 
         $repository
             ->expects($this->once())
-            ->method('getSirenByIdInstance')
+            ->method('getCompanyById')
             ->with(1)
             ->willReturn($entity);
 
@@ -77,7 +77,7 @@ final class ActionGetCompanyById extends TestCase
         $repository = $this->createMock(LegalUnitPayloadHistoryRepository::class);
 
         $repository
-            ->method('getSirenByIdInstance')
+            ->method('getCompanyById')
             ->willReturn(null);
 
         $action = new GetCompanyById($repository);

@@ -77,7 +77,7 @@ final class ActionSearchFacilityBySiretTest extends TestCase
 
         $repository
             ->expects($this->once())
-            ->method('search')
+            ->method('searchFacilityBySiret')
             ->with($filters)
             ->willReturn([$entity]);
 
@@ -185,7 +185,7 @@ final class ActionSearchFacilityBySiretTest extends TestCase
 
         $repository
             ->expects($this->once())
-            ->method('search')
+            ->method('searchFacilityBySiret')
             ->with(
                 $filters,
                 $sorting
@@ -283,7 +283,7 @@ final class ActionSearchFacilityBySiretTest extends TestCase
 
         $repository
             ->expects($this->once())
-            ->method('search')
+            ->method('searchFacilityBySiret')
             ->with(
                 $filters,
                 null,
@@ -390,7 +390,7 @@ final class ActionSearchFacilityBySiretTest extends TestCase
 
         $repository
             ->expects($this->once())
-            ->method('search')
+            ->method('searchFacilityBySiret')
             ->with($filters)
             ->willReturn([$entity]);
 
@@ -457,7 +457,7 @@ final class ActionSearchFacilityBySiretTest extends TestCase
 
         $repository
             ->expects($this->once())
-            ->method('search')
+            ->method('searchFacilityBySiret')
             ->with(
                 $filters,
                 $sorting,

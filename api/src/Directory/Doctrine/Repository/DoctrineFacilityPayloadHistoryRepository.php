@@ -23,26 +23,39 @@ final class DoctrineFacilityPayloadHistoryRepository extends ServiceEntityReposi
         parent::__construct($registry, FacilityPayloadHistory::class);
     }
 
-    public function getSiretByIdInstance(int $id): ?FacilityPayloadHistory
+    public function getFacilityById(int $id): ?FacilityPayloadHistory
     {
-        return $this->findOneBy([
-            'idInstance' => $id,
-        ]);
+        return $this->createQueryBuilder('FacilityPayloadHistory')
+            ->where('FacilityPayloadHistory.idInstance = :id')
+            ->setParameter('id', $id)
+            ->orderBy('FacilityPayloadHistory.version', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
-    public function getSiretBySiretNumber(string $siret): ?FacilityPayloadHistory
+    public function getFacilityBySiret(string $siret): ?FacilityPayloadHistory
     {
-        return $this->findOneBy([
-            'siret' => $siret,
-        ]);
+        return $this->createQueryBuilder('FacilityPayloadHistory')
+            ->where('FacilityPayloadHistory.siret = :siret')
+            ->setParameter('siret', $siret)
+            ->orderBy('FacilityPayloadHistory.version', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     // TODO rajouter ignore
     // TODO rajouter include
-    public function search(SearchSiretFilters $filters, ?array $sorting, ?int $limit): array
+    public function searchFacilityBySiret(SearchSiretFilters $filters, ?array $sorting, ?int $limit): array
     {
         $qb = $this->createQueryBuilder('FacilityPayloadHistory')
             ->leftJoin('FacilityPayloadHistory.address', 'address')
+            ->where('FacilityPayloadHistory.version = (
+                SELECT MAX(FacilityPayloadHistory2.version)
+                FROM App\Directory\Doctrine\Entity\FacilityPayloadHistory FacilityPayloadHistory2
+                WHERE FacilityPayloadHistory2.idInstance = FacilityPayloadHistory.idInstance
+            )')
             ->setMaxResults($limit);
 
         if (null !== $filters->siret && ContainsOperator::opContains === $filters->siret->operator) {
@@ -109,5 +122,15 @@ final class DoctrineFacilityPayloadHistoryRepository extends ServiceEntityReposi
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function getMaxVersion(int $idInstance): int
+    {
+        return (int) $this->createQueryBuilder('FacilityPayloadHistory')
+            ->select('MAX(FacilityPayloadHistory.version)')
+            ->where('FacilityPayloadHistory.idInstance = :id')
+            ->setParameter('id', $idInstance)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 }

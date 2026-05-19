@@ -66,7 +66,7 @@ final class ActionGetFacilityByIdTest extends TestCase
 
         $repository
             ->expects($this->once())
-            ->method('getSiretByIdInstance')
+            ->method('getFacilityById')
             ->with(1)
             ->willReturn($entity);
 
@@ -149,7 +149,7 @@ final class ActionGetFacilityByIdTest extends TestCase
 
         $repository
             ->expects($this->once())
-            ->method('getSiretByIdInstance')
+            ->method('getFacilityById')
             ->with(1)
             ->willReturn($entity);
 
@@ -191,7 +191,7 @@ final class ActionGetFacilityByIdTest extends TestCase
         $repository = $this->createMock(FacilityPayloadHistoryRepository::class);
 
         $repository
-            ->method('getSiretByIdInstance')
+            ->method('getFacilityById')
             ->willReturn(null);
 
         $action = new GetFacilityById($repository);

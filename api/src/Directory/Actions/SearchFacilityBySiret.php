@@ -18,7 +18,7 @@ final readonly class SearchFacilityBySiret
 
     public function __invoke(SearchFacilityBySiretResource $input): SearchSiretInput
     {
-        $entities = $this->repository->search(
+        $entities = $this->repository->searchFacilityBySiret(
             $input->filters,
             $input->sorting,
             $input->limit

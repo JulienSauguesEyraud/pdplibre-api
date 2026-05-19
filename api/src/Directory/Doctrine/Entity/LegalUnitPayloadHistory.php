@@ -12,7 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
 class LegalUnitPayloadHistory
 {
     #[ORM\Id]
-    #[ORM\Column(name: 'id_instance', unique: true)]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(name: 'id', unique: true)]
+    private int $id;
+
+    #[ORM\Column(name: 'id_instance')]
     private int $idInstance;
 
     #[ORM\Column(name: 'siren', length: 9)]
@@ -27,7 +31,13 @@ class LegalUnitPayloadHistory
     #[ORM\Column(name: 'administrative_status')]
     private LegalUnitAdministrativeStatus $administrativeStatus;
 
-    public static function create(int $idInstance, string $siren, string $businessName, EntityType $entityType, LegalUnitAdministrativeStatus $administrativeStatus): self
+    #[ORM\Column(name: 'version')]
+    private int $version;
+
+    #[ORM\Column(name: 'updated_at')]
+    private \DateTimeImmutable $updatedAt;
+
+    public static function create(int $idInstance, string $siren, string $businessName, EntityType $entityType, LegalUnitAdministrativeStatus $administrativeStatus, int $version = 1): self
     {
         $self = new self();
 
@@ -37,7 +47,15 @@ class LegalUnitPayloadHistory
         $self->entityType = $entityType;
         $self->administrativeStatus = $administrativeStatus;
 
+        $self->updatedAt = new \DateTimeImmutable();
+        $self->version = $version;
+
         return $self;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
     }
 
     public function getIdInstance(): int
@@ -63,5 +81,15 @@ class LegalUnitPayloadHistory
     public function getAdministrativeStatus(): LegalUnitAdministrativeStatus
     {
         return $this->administrativeStatus;
+    }
+
+    public function getVersion(): int
+    {
+        return $this->version;
+    }
+
+    public function getUpdatedAt(): \DateTimeImmutable
+    {
+        return $this->updatedAt;
     }
 }

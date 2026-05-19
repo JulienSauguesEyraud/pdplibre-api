@@ -45,6 +45,11 @@ class B2gAdditionalData
         return $self;
     }
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
     public function getPm(): bool
     {
         return $this->pm;

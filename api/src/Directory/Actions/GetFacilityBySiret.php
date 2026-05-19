@@ -17,7 +17,7 @@ final readonly class GetFacilityBySiret
 
     public function __invoke(string $siret, ?array $fields = null): FacilityPayloadHistoryOutput
     {
-        $facilityPayloadHistory = $this->repository->getSiretBySiretNumber($siret);
+        $facilityPayloadHistory = $this->repository->getFacilityBySiret($siret);
 
         if (!$facilityPayloadHistory) {
             throw new ObjectNotFoundException('SIREN not found');

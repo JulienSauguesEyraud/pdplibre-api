@@ -26,9 +26,9 @@ interface LegalUnitPayloadHistoryRepository
      */
     public function findOneBy(array $criteria, ?array $orderBy = null): ?object;
 
-    public function getSirenByIdInstance(int $id): ?LegalUnitPayloadHistory;
+    public function getCompanyById(int $id): ?LegalUnitPayloadHistory;
 
-    public function getSirenBySirenNumber(string $siren): ?LegalUnitPayloadHistory;
+    public function getCompanyBySiren(string $siren): ?LegalUnitPayloadHistory;
 
     // TODO rajouter ignore
     /**
@@ -37,5 +37,7 @@ interface LegalUnitPayloadHistoryRepository
     /**
      * @param array<SearchSirenSortingInner> $sorting
      */
-    public function search(SearchSirenFilters $filters, ?array $sorting, ?int $limit): array;
+    public function searchCompanyBySiren(SearchSirenFilters $filters, ?array $sorting, ?int $limit): array;
+
+    public function getMaxVersion(int $idInstance): int;
 }

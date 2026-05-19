@@ -18,7 +18,7 @@ final readonly class SearchCompanyBySiren
 
     public function __invoke(SearchCompanyBySirenResource $input): SearchSirenInput
     {
-        $entities = $this->repository->search(
+        $entities = $this->repository->searchCompanyBySiren(
             $input->filters,
             $input->sorting,
             $input->limit
