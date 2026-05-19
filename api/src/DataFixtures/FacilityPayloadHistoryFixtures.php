@@ -40,9 +40,58 @@ final class FacilityPayloadHistoryFixtures extends ArrayFixture implements ORMFi
 
     public function getObjects(): iterable
     {
-        $idInstance = 1;
+        yield [
+            'id' => 1,
+            'idInstance' => 1,
+            'siren' => '123456789',
+            'siret' => '12345678900000',
+            'name' => 'test name',
+            'facilityType' => FacilityType::P,
+            'diffusible' => DiffusionStatus::P,
+            'administrativeStatus' => FacilityAdministrativeStatus::C,
+            'address' => $this->getReference('address-1', AddressRead::class),
+            'b2gAdditionalData' => $this->getReference('b2gAdditionalData-1', B2gAdditionalData::class),
+            'legalUnit' => $this->getReference('legalUnit-1', LegalUnitPayloadHistory::class),
+            'version' => 1,
+            'updatedAt' => new \DateTimeImmutable()->modify('-2 years'),
+        ];
 
-        for ($i = 1; $i <= 1000; ++$i) {
+        yield [
+            'id' => 2,
+            'idInstance' => 1,
+            'siren' => '123456789',
+            'siret' => '12345678900000',
+            'name' => 'test name',
+            'facilityType' => FacilityType::P,
+            'diffusible' => DiffusionStatus::P,
+            'administrativeStatus' => FacilityAdministrativeStatus::A,
+            'address' => $this->getReference('address-1', AddressRead::class),
+            'b2gAdditionalData' => $this->getReference('b2gAdditionalData-1', B2gAdditionalData::class),
+            'legalUnit' => $this->getReference('legalUnit-1', LegalUnitPayloadHistory::class),
+            'version' => 2,
+            'updatedAt' => new \DateTimeImmutable()->modify('-1 years'),
+        ];
+
+        yield [
+            'id' => 3,
+            'idInstance' => 1,
+            'siren' => '123456789',
+            'siret' => '12345678900000',
+            'name' => 'test name',
+            'facilityType' => FacilityType::P,
+            'diffusible' => DiffusionStatus::P,
+            'administrativeStatus' => FacilityAdministrativeStatus::A,
+            'address' => $this->getReference('address-1', AddressRead::class),
+            'b2gAdditionalData' => $this->getReference('b2gAdditionalData-1', B2gAdditionalData::class),
+            'legalUnit' => $this->getReference('legalUnit-2', LegalUnitPayloadHistory::class),
+            'version' => 3,
+            'updatedAt' => new \DateTimeImmutable(),
+        ];
+
+        $id = 4;
+        $idInstance = 2;
+
+        for ($i = 2; $i <= 1000; ++$i) {
             $legalUnit = $this->getReference('legalUnit-'.random_int(1, 300), LegalUnitPayloadHistory::class);
             $siren = $legalUnit->getSiren();
             $siret = $siren.$this->faker->randomNumber(5, true);
@@ -57,6 +106,7 @@ final class FacilityPayloadHistoryFixtures extends ArrayFixture implements ORMFi
                     $administrativeStatus = FacilityAdministrativeStatus::C;
                 }
                 yield [
+                    'id' => $id,
                     'idInstance' => $idInstance,
                     'siren' => $siren,
                     'siret' => $siret,
@@ -70,6 +120,8 @@ final class FacilityPayloadHistoryFixtures extends ArrayFixture implements ORMFi
                     'version' => $v,
                     'updatedAt' => new \DateTimeImmutable()->modify('-'.($nbVersions - $v).' years'),
                 ];
+
+                ++$id;
             }
 
             ++$idInstance;

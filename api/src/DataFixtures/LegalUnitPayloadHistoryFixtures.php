@@ -31,9 +31,31 @@ final class LegalUnitPayloadHistoryFixtures extends ArrayFixture implements ORMF
 
     public function getObjects(): iterable
     {
-        $idInstance = 1;
-        $id = 1;
-        for ($i = 1; $i <= 300; ++$i) {
+        yield [
+            'id' => 1,
+            'idInstance' => 1,
+            'siren' => '123456789',
+            'businessName' => 'test business name',
+            'entityType' => EntityType::Public,
+            'administrativeStatus' => LegalUnitAdministrativeStatus::C,
+            'version' => 1,
+            'updatedAt' => new \DateTimeImmutable()->modify('-1 years'),
+        ];
+
+        yield [
+            'id' => 2,
+            'idInstance' => 1,
+            'siren' => '123456789',
+            'businessName' => 'test business name',
+            'entityType' => EntityType::Public,
+            'administrativeStatus' => LegalUnitAdministrativeStatus::A,
+            'version' => 2,
+            'updatedAt' => new \DateTimeImmutable(),
+        ];
+
+        $idInstance = 2;
+        $id = 3;
+        for ($i = 2; $i <= 300; ++$i) {
             $siren = (string) $this->faker->randomNumber(9, true);
             $businessName = $this->faker->company();
             $entityType = $this->faker->randomElement(EntityType::class);

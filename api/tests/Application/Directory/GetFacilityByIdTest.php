@@ -20,64 +20,7 @@ final class GetFacilityByIdTest extends WebTestCase
     public function testGetFacilityById(): void
     {
         $client = self::createClient();
-        $container = self::getContainer();
 
-        $em = $container->get('doctrine')->getManager();
-
-        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\FacilityPayloadHistory e')->execute();
-        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\AddressRead e')->execute();
-        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\B2gAdditionalData e')->execute();
-        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\LegalUnitPayloadHistory e')->execute();
-
-        $address = AddressRead::create(
-            addressLine1: 'address 1',
-            addressLine2: 'address 2',
-            addressLine3: 'address 3',
-            postalCode: '12345',
-            countrySubdivision: 'subdivision',
-            locality: 'locality',
-            countryCode: 'FR',
-            countryName: 'France',
-        );
-
-        $em->persist($address);
-
-        $b2g = B2gAdditionalData::create(
-            pm: true,
-            pmOnly: true,
-            managesPaymentStatus: true,
-            managesLegalCommitmentCode: true,
-            managesLegalCommitmentOrServiceCode: true,
-            serviceCodeStatus: true,
-        );
-
-        $em->persist($b2g);
-
-        $legalUnit = LegalUnitPayloadHistory::create(
-            idInstance: 1,
-            siren: '123456789',
-            businessName: 'test business name',
-            entityType: EntityType::Public,
-            administrativeStatus: LegalUnitAdministrativeStatus::A,
-        );
-
-        $em->persist($legalUnit);
-
-        $entity = FacilityPayloadHistory::create(
-            idInstance: 1,
-            siret: '12345678900000',
-            siren: '123456789',
-            name: 'test name',
-            facilityType: FacilityType::P,
-            diffusible: DiffusionStatus::P,
-            administrativeStatus: FacilityAdministrativeStatus::A,
-            address: $address,
-            b2gAdditionalData: $b2g,
-            legalUnit: $legalUnit
-        );
-
-        $em->persist($entity);
-        $em->flush();
 
         $client->request('GET', '/v1/siret/id-instance:1');
 
@@ -123,64 +66,7 @@ final class GetFacilityByIdTest extends WebTestCase
     public function testGetFacilityByIdWithFields(): void
     {
         $client = self::createClient();
-        $container = self::getContainer();
 
-        $em = $container->get('doctrine')->getManager();
-
-        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\FacilityPayloadHistory e')->execute();
-        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\AddressRead e')->execute();
-        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\B2gAdditionalData e')->execute();
-        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\LegalUnitPayloadHistory e')->execute();
-
-        $address = AddressRead::create(
-            addressLine1: 'address 1',
-            addressLine2: 'address 2',
-            addressLine3: 'address 3',
-            postalCode: '12345',
-            countrySubdivision: 'subdivision',
-            locality: 'locality',
-            countryCode: 'FR',
-            countryName: 'France',
-        );
-
-        $em->persist($address);
-
-        $b2g = B2gAdditionalData::create(
-            pm: true,
-            pmOnly: true,
-            managesPaymentStatus: true,
-            managesLegalCommitmentCode: true,
-            managesLegalCommitmentOrServiceCode: true,
-            serviceCodeStatus: true,
-        );
-
-        $em->persist($b2g);
-
-        $legalUnit = LegalUnitPayloadHistory::create(
-            idInstance: 1,
-            siren: '123456789',
-            businessName: 'test business name',
-            entityType: EntityType::Public,
-            administrativeStatus: LegalUnitAdministrativeStatus::A,
-        );
-
-        $em->persist($legalUnit);
-
-        $entity = FacilityPayloadHistory::create(
-            idInstance: 1,
-            siret: '12345678900000',
-            siren: '123456789',
-            name: 'test name',
-            facilityType: FacilityType::P,
-            diffusible: DiffusionStatus::P,
-            administrativeStatus: FacilityAdministrativeStatus::A,
-            address: $address,
-            b2gAdditionalData: $b2g,
-            legalUnit: $legalUnit
-        );
-
-        $em->persist($entity);
-        $em->flush();
 
         $client->request('GET', '/v1/siret/id-instance:1',
             [

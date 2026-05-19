@@ -20,7 +20,17 @@ final class B2gAdditionalDataFixtures extends ArrayFixture implements ORMFixture
 
     public function getObjects(): iterable
     {
-        for ($i = 1; $i <= 1000; ++$i) {
+        yield [
+            'id' => 1,
+            'pm' => true,
+            'pmOnly' => true,
+            'managesPaymentStatus' => true,
+            'managesLegalCommitmentCode' => true,
+            'managesLegalCommitmentOrServiceCode' => true,
+            'serviceCodeStatus' => true,
+        ];
+
+        for ($i = 2; $i <= 1000; ++$i) {
             yield [
                 'id' => $i,
                 'pm' => 1 === random_int(0, 1),

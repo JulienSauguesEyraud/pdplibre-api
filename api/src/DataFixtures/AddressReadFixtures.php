@@ -29,7 +29,19 @@ final class AddressReadFixtures extends ArrayFixture implements ORMFixtureInterf
 
     public function getObjects(): iterable
     {
-        for ($i = 1; $i <= 1000; ++$i) {
+        yield [
+            'id' => 1,
+            'addressLine1' => 'address 1',
+            'addressLine2' => 'address 2',
+            'addressLine3' => 'address 3',
+            'postalCode' => '12345',
+            'countrySubdivision' => "subdivision",
+            'locality' => 'locality',
+            'countryCode' => 'FR',
+            'countryName' => 'France',
+        ];
+
+        for ($i = 2; $i <= 1000; ++$i) {
             $countryCode = 'FR';
             $countryName = 'France';
             if (10 === random_int(1, 10)) {

@@ -14,25 +14,6 @@ final class GetCompanyBySirenTest extends WebTestCase
     public function testGetCompanyBySiren(): void
     {
         $client = self::createClient();
-        $container = self::getContainer();
-
-        $em = $container->get('doctrine')->getManager();
-
-        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\FacilityPayloadHistory e')->execute();
-        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\AddressRead e')->execute();
-        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\B2gAdditionalData e')->execute();
-        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\LegalUnitPayloadHistory e')->execute();
-
-        $entity = LegalUnitPayloadHistory::create(
-            idInstance: 1,
-            siren: '123456789',
-            businessName: 'test business name',
-            entityType: EntityType::Public,
-            administrativeStatus: LegalUnitAdministrativeStatus::A,
-        );
-
-        $em->persist($entity);
-        $em->flush();
 
         $client->request('GET', '/v1/siren/code-insee:123456789');
 
@@ -50,26 +31,7 @@ final class GetCompanyBySirenTest extends WebTestCase
     public function testGetCompanyBySirenWithFields(): void
     {
         $client = self::createClient();
-        $container = self::getContainer();
-
-        $em = $container->get('doctrine')->getManager();
-
-        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\FacilityPayloadHistory e')->execute();
-        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\AddressRead e')->execute();
-        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\B2gAdditionalData e')->execute();
-        $em->createQuery('DELETE FROM App\Directory\Doctrine\Entity\LegalUnitPayloadHistory e')->execute();
-
-        $entity = LegalUnitPayloadHistory::create(
-            idInstance: 1,
-            siren: '123456789',
-            businessName: 'test business name',
-            entityType: EntityType::Public,
-            administrativeStatus: LegalUnitAdministrativeStatus::A,
-        );
-
-        $em->persist($entity);
-        $em->flush();
-
+        
         $client->request('GET', '/v1/siren/code-insee:123456789',
             [
                 'fields' => ['siren', 'businessName'],
