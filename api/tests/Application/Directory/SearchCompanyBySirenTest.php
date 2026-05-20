@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Application\Directory;
 
-use App\Directory\Doctrine\Entity\LegalUnitPayloadHistory;
-use App\Directory\Enum\EntityType;
-use App\Directory\Enum\LegalUnitAdministrativeStatus;
 use App\Directory\Enum\Order;
 use App\Directory\Input\SearchSirenFilters;
 use App\Directory\Input\SearchSirenFiltersBusinessName;

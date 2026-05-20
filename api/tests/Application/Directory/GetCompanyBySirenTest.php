@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Application\Directory;
 
-use App\Directory\Doctrine\Entity\LegalUnitPayloadHistory;
-use App\Directory\Enum\EntityType;
-use App\Directory\Enum\LegalUnitAdministrativeStatus;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class GetCompanyBySirenTest extends WebTestCase
@@ -31,7 +28,7 @@ final class GetCompanyBySirenTest extends WebTestCase
     public function testGetCompanyBySirenWithFields(): void
     {
         $client = self::createClient();
-        
+
         $client->request('GET', '/v1/siren/code-insee:123456789',
             [
                 'fields' => ['siren', 'businessName'],

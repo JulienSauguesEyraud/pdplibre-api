@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Application\Directory;
 
-use App\Directory\Doctrine\Entity\LegalUnitPayloadHistory;
-use App\Directory\Enum\EntityType;
-use App\Directory\Enum\LegalUnitAdministrativeStatus;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class GetCompanyByIdTest extends WebTestCase

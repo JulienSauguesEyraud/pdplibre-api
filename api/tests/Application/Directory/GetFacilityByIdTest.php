@@ -4,15 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Application\Directory;
 
-use App\Directory\Doctrine\Entity\AddressRead;
-use App\Directory\Doctrine\Entity\B2gAdditionalData;
-use App\Directory\Doctrine\Entity\FacilityPayloadHistory;
-use App\Directory\Doctrine\Entity\LegalUnitPayloadHistory;
-use App\Directory\Enum\DiffusionStatus;
-use App\Directory\Enum\EntityType;
-use App\Directory\Enum\FacilityAdministrativeStatus;
-use App\Directory\Enum\FacilityType;
-use App\Directory\Enum\LegalUnitAdministrativeStatus;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class GetFacilityByIdTest extends WebTestCase
@@ -20,7 +11,6 @@ final class GetFacilityByIdTest extends WebTestCase
     public function testGetFacilityById(): void
     {
         $client = self::createClient();
-
 
         $client->request('GET', '/v1/siret/id-instance:1');
 
@@ -66,7 +56,6 @@ final class GetFacilityByIdTest extends WebTestCase
     public function testGetFacilityByIdWithFields(): void
     {
         $client = self::createClient();
-
 
         $client->request('GET', '/v1/siret/id-instance:1',
             [

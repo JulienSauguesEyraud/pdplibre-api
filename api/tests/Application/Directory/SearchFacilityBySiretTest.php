@@ -4,15 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Application\Directory;
 
-use App\Directory\Doctrine\Entity\AddressRead;
-use App\Directory\Doctrine\Entity\B2gAdditionalData;
-use App\Directory\Doctrine\Entity\FacilityPayloadHistory;
-use App\Directory\Doctrine\Entity\LegalUnitPayloadHistory;
-use App\Directory\Enum\DiffusionStatus;
-use App\Directory\Enum\EntityType;
-use App\Directory\Enum\FacilityAdministrativeStatus;
-use App\Directory\Enum\FacilityType;
-use App\Directory\Enum\LegalUnitAdministrativeStatus;
 use App\Directory\Enum\Order;
 use App\Directory\Input\SearchSiretFilters;
 use App\Directory\Input\SearchSiretFiltersName;
@@ -24,7 +15,6 @@ final class SearchFacilityBySiretTest extends WebTestCase
     public function testSearchFacilityBySiret(): void
     {
         $client = self::createClient();
-
 
         $filters = new SearchSiretFilters();
         $nameFilter = new SearchSiretFiltersName();
@@ -154,7 +144,6 @@ final class SearchFacilityBySiretTest extends WebTestCase
     {
         $client = self::createClient();
 
-
         $filters = new SearchSiretFilters();
         $nameFilter = new SearchSiretFiltersName();
         $nameFilter->name = 'test name';
@@ -219,7 +208,6 @@ final class SearchFacilityBySiretTest extends WebTestCase
     public function testSearchFacilityBySiretWithLimit(): void
     {
         $client = self::createClient();
-
 
         $filters = new SearchSiretFilters();
         $nameFilter = new SearchSiretFiltersName();

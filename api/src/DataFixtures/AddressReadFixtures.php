@@ -35,7 +35,7 @@ final class AddressReadFixtures extends ArrayFixture implements ORMFixtureInterf
             'addressLine2' => 'address 2',
             'addressLine3' => 'address 3',
             'postalCode' => '12345',
-            'countrySubdivision' => "subdivision",
+            'countrySubdivision' => 'subdivision',
             'locality' => 'locality',
             'countryCode' => 'FR',
             'countryName' => 'France',
