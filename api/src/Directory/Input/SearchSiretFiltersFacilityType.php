@@ -11,10 +11,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class SearchSiretFiltersFacilityType
 {
-    #[Assert\All([
-        new Assert\NotBlank(),
-        new Assert\Choice(callback: [FacilityType::class, 'standardCases']),
-    ])]
+    #[Assert\NotBlank]
+    #[Assert\Choice(callback: [FacilityType::class, 'cases'])]
+
     public ?EntityType $entityType = null;
     public ContainsOperator $operator = ContainsOperator::opContains;
 }

@@ -26,13 +26,13 @@ class FacilityPayloadHistoryInput
     #[Assert\Length(max: 100)]
     public ?string $name = null;
 
-    #[Assert\Choice(callback: [FacilityType::class, 'standardCases'])]
+    #[Assert\Choice(callback: [FacilityType::class, 'cases'])]
     public ?FacilityType $facilityType = null;
 
-    #[Assert\Choice(callback: [DiffusionStatus::class, 'standardCases'])]
+    #[Assert\Choice(callback: [DiffusionStatus::class, 'cases'])]
     public ?DiffusionStatus $diffusible = null;
 
-    #[Assert\Choice(callback: [FacilityAdministrativeStatus::class, 'standardCases'])]
+    #[Assert\Choice(callback: [FacilityAdministrativeStatus::class, 'cases'])]
     public ?FacilityAdministrativeStatus $administrativeStatus = null;
 
     #[Assert\Length(max: 255)]

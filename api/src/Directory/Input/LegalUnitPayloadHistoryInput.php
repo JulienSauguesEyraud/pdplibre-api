@@ -22,9 +22,9 @@ class LegalUnitPayloadHistoryInput
     #[Assert\Length(max: 150)]
     public ?string $businessName = null;
 
-    #[Assert\Choice(callback: [EntityType::class, 'standardCases'])]
+    #[Assert\Choice(callback: [EntityType::class, 'cases'])]
     public ?EntityType $entityType = null;
 
-    #[Assert\Choice(callback: [LegalUnitAdministrativeStatus::class, 'standardCases'])]
+    #[Assert\Choice(callback: [LegalUnitAdministrativeStatus::class, 'cases'])]
     public ?LegalUnitAdministrativeStatus $legalUnitAdministrativeStatus = null;
 }

@@ -10,10 +10,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class SearchSiretFiltersAdministrativeStatus
 {
-    #[Assert\All([
-        new Assert\NotBlank(),
-        new Assert\Choice(callback: [FacilityAdministrativeStatus::class, 'standardCases']),
-    ])]
+    #[Assert\NotBlank]
+    #[Assert\Choice(callback: [FacilityAdministrativeStatus::class, 'cases'])]
+
     public ?FacilityAdministrativeStatus $administrativeStatus = null;
     public StrictOperator $operator = StrictOperator::opStrict;
 }

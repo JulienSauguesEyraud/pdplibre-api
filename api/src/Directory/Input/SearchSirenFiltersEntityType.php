@@ -10,10 +10,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class SearchSirenFiltersEntityType
 {
-    #[Assert\All([
-        new Assert\NotBlank(),
-        new Assert\Choice(callback: [EntityType::class, 'standardCases']),
-    ])]
+    #[Assert\NotBlank]
+    #[Assert\Choice(callback: [EntityType::class, 'cases'])]
+
     public ?EntityType $entityType = null;
     public StrictOperator $operator = StrictOperator::opStrict;
 }
