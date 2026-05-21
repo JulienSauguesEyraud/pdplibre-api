@@ -6,11 +6,13 @@ namespace App\Directory\ApiPlatform\ApiResource;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\QueryParameter;
 use App\Directory\ApiPlatform\StateProvider\GetFacilityBySiretProvider;
 use App\Directory\ValueObjects\FacilityPayloadHistoryOutput;
 
 #[ApiResource(operations: [
+    new GetCollection(),
     new Get(
         uriTemplate: '/v1/siret/code-insee:{siret}',
         outputFormats: ['json'],

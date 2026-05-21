@@ -6,6 +6,7 @@ namespace App\Directory\ApiPlatform\ApiResource;
 
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Response;
@@ -17,6 +18,7 @@ use App\Directory\Input\SearchSiretSorting;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(operations: [
+    new GetCollection(),
     new Post(
         uriTemplate: '/v1/siret/search',
         outputFormats: ['json'],

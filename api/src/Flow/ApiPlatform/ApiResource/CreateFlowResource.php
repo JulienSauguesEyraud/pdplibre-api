@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Flow\ApiPlatform\ApiResource;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Response;
@@ -15,6 +16,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(operations: [
+    new GetCollection(),
     new Post(
         uriTemplate: '/v1/flows',
         inputFormats: ['multipart'],
