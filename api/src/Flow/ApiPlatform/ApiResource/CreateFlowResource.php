@@ -10,13 +10,16 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Response;
 use App\Flow\ApiPlatform\StateProcessor\CreateFlowProcessor;
+use App\Flow\ApiPlatform\StateProvider\CreateFlowCollectionProvider;
 use App\Flow\DTO\FullFlowInfo;
 use App\Flow\Input\FlowInfoInput;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(operations: [
-    new GetCollection(),
+    new GetCollection(
+        provider: CreateFlowCollectionProvider::class,
+    ),
     new Post(
         uriTemplate: '/v1/flows',
         inputFormats: ['multipart'],

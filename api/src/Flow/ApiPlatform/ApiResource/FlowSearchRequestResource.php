@@ -11,12 +11,16 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Response;
 use App\Flow\ApiPlatform\StateProcessor\SearchFlowProcessor;
+use App\Flow\ApiPlatform\StateProvider\CreateFlowCollectionProvider;
+use App\Flow\ApiPlatform\StateProvider\FlowSearchRequestCollectionProvider;
 use App\Flow\Input\SearchFlowFilters;
 use App\Flow\ValueObjects\SearchFlowInput;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(operations: [
-    new GetCollection(),
+    new GetCollection(
+        provider: FlowSearchRequestCollectionProvider::class,
+    ),
     new Post(
         uriTemplate: '/v1/flows/search',
         outputFormats: ['json'],

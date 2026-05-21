@@ -11,6 +11,8 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Response;
 use App\Directory\ApiPlatform\StateProcessor\SearchCompanyBySirenProcessor;
+use App\Directory\ApiPlatform\StateProvider\GetFacilityByIdCollectionProvider;
+use App\Directory\ApiPlatform\StateProvider\GetFacilityByIdProvider;
 use App\Directory\Enum\Order;
 use App\Directory\Input\LegalUnitPayloadHistoryInput;
 use App\Directory\Input\SearchSirenFilters;
@@ -18,7 +20,9 @@ use App\Directory\Input\SearchSirenSortingInner;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(operations: [
-    new GetCollection(),
+    new GetCollection(
+        provider: GetFacilityByIdCollectionProvider::class,
+    ),
     new Post(
         uriTemplate: '/v1/siren/search',
         outputFormats: ['json'],

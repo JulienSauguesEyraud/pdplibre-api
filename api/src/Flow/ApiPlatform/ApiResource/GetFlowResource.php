@@ -8,11 +8,14 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\QueryParameter;
+use App\Flow\ApiPlatform\StateProvider\GetFlowCollectionProvider;
 use App\Flow\ApiPlatform\StateProvider\GetFlowProvider;
 use App\Flow\ValueObjects\FlowOutput;
 
 #[ApiResource(operations: [
-    new GetCollection(),
+    new GetCollection(
+        provider: GetFlowCollectionProvider::class,
+    ),
     new Get(
         uriTemplate: '/v1/flows/{flowId}',
         outputFormats: ['json'],

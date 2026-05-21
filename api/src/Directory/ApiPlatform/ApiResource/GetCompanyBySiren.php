@@ -8,11 +8,14 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\QueryParameter;
+use App\Directory\ApiPlatform\StateProvider\GetCompanyBySirenCollectionProvider;
 use App\Directory\ApiPlatform\StateProvider\GetCompanyBySirenProvider;
 use App\Directory\ValueObjects\LegalUnitPayloadHistoryOutput;
 
 #[ApiResource(operations: [
-    new GetCollection(),
+    new GetCollection(
+        provider: GetCompanyBySirenCollectionProvider::class,
+    ),
     new Get(
         uriTemplate: '/v1/siren/code-insee:{siren}',
         outputFormats: ['json'],

@@ -9,10 +9,13 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Response;
+use App\Flow\ApiPlatform\StateProvider\HealthcheckCollectionProvider;
 use App\Flow\ApiPlatform\StateProvider\HealthcheckProvider;
 
 #[ApiResource(operations: [
-    new GetCollection(),
+    new GetCollection(
+        provider: HealthcheckCollectionProvider::class,
+    ),
     new Get(
         uriTemplate: '/v1/healthcheck',
         status: 200,

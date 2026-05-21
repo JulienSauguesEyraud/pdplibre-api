@@ -8,11 +8,15 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\QueryParameter;
+use App\Directory\ApiPlatform\StateProvider\GetFacilityByIdCollectionProvider;
+use App\Directory\ApiPlatform\StateProvider\GetFacilityByIdProvider;
 use App\Directory\ApiPlatform\StateProvider\GetFacilityBySiretProvider;
 use App\Directory\ValueObjects\FacilityPayloadHistoryOutput;
 
 #[ApiResource(operations: [
-    new GetCollection(),
+    new GetCollection(
+        provider: GetFacilityByIdCollectionProvider::class,
+    ),
     new Get(
         uriTemplate: '/v1/siret/code-insee:{siret}',
         outputFormats: ['json'],

@@ -11,6 +11,8 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Response;
 use App\Directory\ApiPlatform\StateProcessor\SearchFacilityBySiretProcessor;
+use App\Directory\ApiPlatform\StateProvider\GetFacilityByIdCollectionProvider;
+use App\Directory\ApiPlatform\StateProvider\GetFacilityByIdProvider;
 use App\Directory\Enum\Order;
 use App\Directory\Input\FacilityPayloadHistoryInput;
 use App\Directory\Input\SearchSiretFilters;
@@ -18,7 +20,9 @@ use App\Directory\Input\SearchSiretSorting;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(operations: [
-    new GetCollection(),
+    new GetCollection(
+        provider: GetFacilityByIdCollectionProvider::class,
+    ),
     new Post(
         uriTemplate: '/v1/siret/search',
         outputFormats: ['json'],
