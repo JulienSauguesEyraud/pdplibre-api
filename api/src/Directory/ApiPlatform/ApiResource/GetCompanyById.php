@@ -9,6 +9,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\QueryParameter;
 use App\Directory\ApiPlatform\StateProvider\GetCompanyByIdCollectionProvider;
+use App\Directory\ApiPlatform\StateProvider\GetCompanyByIdProvider;
 use App\Directory\ValueObjects\LegalUnitPayloadHistoryOutput;
 
 #[ApiResource(operations: [
@@ -21,7 +22,7 @@ use App\Directory\ValueObjects\LegalUnitPayloadHistoryOutput;
         output: LegalUnitPayloadHistoryOutput::class,
         validate: false,
         name: 'getCompanyById',
-        provider: GetCompanyByIdCollectionProvider::class,
+        provider: GetCompanyByIdProvider::class,
         parameters: [
             'fields' => new QueryParameter(),
         ],
