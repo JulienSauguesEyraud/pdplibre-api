@@ -12,7 +12,6 @@ use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Response;
 use App\Directory\ApiPlatform\StateProcessor\SearchCompanyBySirenProcessor;
 use App\Directory\ApiPlatform\StateProvider\GetFacilityByIdCollectionProvider;
-use App\Directory\ApiPlatform\StateProvider\GetFacilityByIdProvider;
 use App\Directory\Enum\Order;
 use App\Directory\Input\LegalUnitPayloadHistoryInput;
 use App\Directory\Input\SearchSirenFilters;

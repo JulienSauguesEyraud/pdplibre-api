@@ -11,7 +11,6 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Response;
 use App\Flow\ApiPlatform\StateProcessor\SearchFlowProcessor;
-use App\Flow\ApiPlatform\StateProvider\CreateFlowCollectionProvider;
 use App\Flow\ApiPlatform\StateProvider\FlowSearchRequestCollectionProvider;
 use App\Flow\Input\SearchFlowFilters;
 use App\Flow\ValueObjects\SearchFlowInput;
