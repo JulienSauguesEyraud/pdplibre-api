@@ -6,7 +6,7 @@ namespace App\Directory\Validation;
 
 use App\Common\Exception\InvalidInputException;
 use App\Directory\Input\SearchSiretFilters;
-use App\Directory\Input\SearchSiretSorting;
+use App\Directory\Input\SearchSiretSortingInner;
 
 final readonly class SearchFacilityBySiretValidator
 {
@@ -28,7 +28,7 @@ final readonly class SearchFacilityBySiretValidator
     ];
 
     /**
-     * @param array<SearchSiretSorting> $sorting
+     * @param array<SearchSiretSortingInner> $sorting
      */
     public function validate(?array $fields = null, ?SearchSiretFilters $filters = null, ?array $sorting = null): void
     {
@@ -80,7 +80,7 @@ final readonly class SearchFacilityBySiretValidator
     }
 
     /**
-     * @param array<SearchSiretSorting> $sorting
+     * @param array<SearchSiretSortingInner> $sorting
      */
     private function validateSorting(?array $sorting): void
     {

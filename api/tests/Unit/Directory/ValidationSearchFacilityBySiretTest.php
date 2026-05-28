@@ -14,7 +14,7 @@ use App\Directory\Input\SearchSiretFiltersLocality;
 use App\Directory\Input\SearchSiretFiltersName;
 use App\Directory\Input\SearchSiretFiltersPostalCode;
 use App\Directory\Input\SearchSiretFiltersSiret;
-use App\Directory\Input\SearchSiretSorting;
+use App\Directory\Input\SearchSiretSortingInner;
 use App\Directory\Validation\SearchFacilityBySiretValidator;
 use PHPUnit\Framework\TestCase;
 
@@ -35,11 +35,11 @@ final class ValidationSearchFacilityBySiretTest extends TestCase
         $filters->siret = $siretFilter;
         $filters->name = $nameFilter;
 
-        $sorting = new SearchSiretSorting();
+        $sorting = new SearchSiretSortingInner();
         $sorting->field = 'siret';
         $sorting->order = Order::ascending;
 
-        $sorting2 = new SearchSiretSorting();
+        $sorting2 = new SearchSiretSortingInner();
         $sorting2->field = 'name';
         $sorting2->order = Order::descending;
 
@@ -250,7 +250,7 @@ final class ValidationSearchFacilityBySiretTest extends TestCase
     {
         $validator = new SearchFacilityBySiretValidator();
 
-        $sorting = new SearchSiretSorting();
+        $sorting = new SearchSiretSortingInner();
         $sorting->field = 'invalid field';
         $sorting->order = Order::ascending;
 
@@ -267,7 +267,7 @@ final class ValidationSearchFacilityBySiretTest extends TestCase
     {
         $validator = new SearchFacilityBySiretValidator();
 
-        $sorting = new SearchSiretSorting();
+        $sorting = new SearchSiretSortingInner();
         $sorting->field = 'siret';
 
         $this->expectException(InvalidInputException::class);

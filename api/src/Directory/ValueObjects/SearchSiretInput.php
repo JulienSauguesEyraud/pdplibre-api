@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Directory\ValueObjects;
 
 use App\Directory\Input\SearchSiretFilters;
-use App\Directory\Input\SearchSiretSorting;
+use App\Directory\Input\SearchSiretSortingInner;
 
 final readonly class SearchSiretInput
 {
@@ -13,7 +13,7 @@ final readonly class SearchSiretInput
      * @param array<FacilityPayloadHistoryOutput> $results
      */
     /**
-     * @param array<SearchSiretSorting> $sorting
+     * @param array<SearchSiretSortingInner> $sorting
      */
     public function __construct(
         public ?int $limit = 25,

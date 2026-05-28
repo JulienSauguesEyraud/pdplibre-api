@@ -18,7 +18,7 @@ use App\Directory\Enum\LegalUnitAdministrativeStatus;
 use App\Directory\Enum\Order;
 use App\Directory\Input\SearchSiretFilters;
 use App\Directory\Input\SearchSiretFiltersName;
-use App\Directory\Input\SearchSiretSorting;
+use App\Directory\Input\SearchSiretSortingInner;
 use App\Directory\Repository\FacilityPayloadHistoryRepository;
 use PHPUnit\Framework\TestCase;
 
@@ -164,11 +164,11 @@ final class ActionSearchFacilityBySiretTest extends TestCase
         $filters->name = new SearchSiretFiltersName();
         $filters->name->name = 'test name';
 
-        $sort1 = new SearchSiretSorting();
+        $sort1 = new SearchSiretSortingInner();
         $sort1->order = Order::ascending;
         $sort1->field = 'siren';
 
-        $sort2 = new SearchSiretSorting();
+        $sort2 = new SearchSiretSortingInner();
         $sort2->order = Order::descending;
         $sort2->field = 'administrativeStatus';
 

@@ -7,7 +7,7 @@ namespace App\Tests\Application\Directory;
 use App\Directory\Enum\Order;
 use App\Directory\Input\SearchSiretFilters;
 use App\Directory\Input\SearchSiretFiltersName;
-use App\Directory\Input\SearchSiretSorting;
+use App\Directory\Input\SearchSiretSortingInner;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class SearchFacilityBySiretTest extends WebTestCase
@@ -149,7 +149,7 @@ final class SearchFacilityBySiretTest extends WebTestCase
         $nameFilter->name = 'test name';
         $filters->name = $nameFilter;
 
-        $sorting = new SearchSiretSorting();
+        $sorting = new SearchSiretSortingInner();
         $sorting->field = 'siret';
         $sorting->order = Order::ascending;
 

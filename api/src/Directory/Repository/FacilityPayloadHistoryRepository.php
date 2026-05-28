@@ -6,7 +6,7 @@ namespace App\Directory\Repository;
 
 use App\Directory\Doctrine\Entity\FacilityPayloadHistory;
 use App\Directory\Input\SearchSiretFilters;
-use App\Directory\Input\SearchSiretSorting;
+use App\Directory\Input\SearchSiretSortingInner;
 
 interface FacilityPayloadHistoryRepository
 {
@@ -36,7 +36,7 @@ interface FacilityPayloadHistoryRepository
      * @return array<FacilityPayloadHistory>
      */
     /**
-     * @param array<SearchSiretSorting> $sorting
+     * @param array<SearchSiretSortingInner> $sorting
      */
     public function searchFacilityBySiret(SearchSiretFilters $filters, ?array $sorting, ?int $limit): array;
 

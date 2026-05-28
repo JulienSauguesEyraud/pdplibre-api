@@ -13,7 +13,7 @@ use App\Directory\ApiPlatform\StateProcessor\SearchFacilityBySiretProcessor;
 use App\Directory\Enum\Order;
 use App\Directory\Input\FacilityPayloadHistoryInput;
 use App\Directory\Input\SearchSiretFilters;
-use App\Directory\Input\SearchSiretSorting;
+use App\Directory\Input\SearchSiretSortingInner;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(operations: [
@@ -58,10 +58,10 @@ final class SearchFacilityBySiret
     public SearchSiretFilters $filters;
 
     /**
-     * @var array<SearchSiretSorting>|null
+     * @var array<SearchSiretSortingInner>|null
      */
     #[Assert\All(constraints: [
-        new Assert\Type(SearchSiretSorting::class),
+        new Assert\Type(SearchSiretSortingInner::class),
     ])]
     public ?array $sorting = null;
 
@@ -79,7 +79,7 @@ final class SearchFacilityBySiret
         }
 
         foreach ($sorting as $sort) {
-            $sortingObj = new SearchSiretSorting();
+            $sortingObj = new SearchSiretSortingInner();
             $sortingObj->field = $sort['field'] ?? null;
             $sortingObj->order = Order::from($sort['order']) ?? null;
             $this->sorting[] = $sortingObj;
